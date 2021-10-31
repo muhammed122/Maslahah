@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.auth.EmailLoginScreen">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/n1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/g1">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:text="@string/welcome_back"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/_16ssp" />
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/create_acc_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/signin_guid_message2"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"
+        android:minLines="2"
+        app:layout_constraintWidth_percent="0.5"
+        app:fontFamily="@font/cairo_regular"
+        android:gravity="center"
+        app:lineHeight="@dimen/_18sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/n1" />
+
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/email_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/create_acc_message"
+        android:hint="@string/email"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/edit_text_shape"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/_8sdp"/>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/password_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/email_login"
+        android:hint="@string/password"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@drawable/edit_text_shape"
+        android:inputType="textPassword"
+        android:padding="@dimen/_8sdp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_login"
+        android:text="@string/forget_password"
+        android:textSize="@dimen/_10ssp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textColor="@color/body_color"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/forget_password"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/white"
+        android:text="@string/login"
+        android:enabled="false"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_16ssp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn"
+        android:text="@string/or"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/login_phone_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/or"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/button_shape_2"
+        android:textColor="@color/accent_color"
+        android:text="@string/login_phone"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_14ssp"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/n2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/login_phone_btn"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:text="@string/not_have_acc"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/go_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:text="@string/siginup"
+            android:textColor="@color/accent_color"
+            android:textSize="@dimen/_14ssp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

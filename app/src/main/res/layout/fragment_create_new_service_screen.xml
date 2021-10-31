@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/carve_card_background"
+    android:paddingBottom="@dimen/_8sdp"
+    tools:context=".ui.CreateNewServiceScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/create_service_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:padding="@dimen/_8sdp"
+            android:text="@string/create_service"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/stroke_color"
+            app:layout_constraintTop_toBottomOf="@+id/create_service_title" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/service_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/service_title"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_title_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/title_exmple"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/service_title_txt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/service_desc_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/more_details"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_title_et" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_details_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/details_eaxmple"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/service_desc_txt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/service_appointment_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/appointment"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_details_et" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_date_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:focusable="false"
+            android:hint="@string/date_eaxmple"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
+            app:layout_constraintWidth_percent="0.45" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_time_et"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:focusable="false"
+            android:hint="@string/time_eaxmple"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
+            app:layout_constraintWidth_percent="0.45" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/service_duration_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/expected_duration"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_time_et" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_duration_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/duration_eaxmple"
+            android:inputType="number"
+            android:maxLength="2"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/service_duration_txt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/service_paper_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/required_paper"
+            android:textColor="@color/body_color"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_duration_et" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/service_papers_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:background="@drawable/edit_text_shape"
+            android:hint="@string/papers_eaxmple"
+            android:inputType="text"
+            android:padding="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/service_paper_txt" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/create_service_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@drawable/button_shape"
+            android:enabled="false"
+            android:fontFamily="@font/sf_ui_display_semibold"
+            android:text="@string/create_service_btn"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/service_papers_et" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</ScrollView>

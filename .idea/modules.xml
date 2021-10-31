@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Maslahah.iml" filepath="$PROJECT_DIR$/.idea/modules/Maslahah.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Maslahah.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Maslahah.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oppwa.mobile-2.65.0-release/Maslahah.oppwa.mobile-2.65.0-release.iml" filepath="$PROJECT_DIR$/.idea/modules/oppwa.mobile-2.65.0-release/Maslahah.oppwa.mobile-2.65.0-release.iml" />
+    </modules>
+  </component>
+</project>

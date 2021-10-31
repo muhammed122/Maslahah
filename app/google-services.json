@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "148594308537",
+    "project_id": "maslahah-26ab5",
+    "storage_bucket": "maslahah-26ab5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148594308537:android:04296870b6986aca43b268",
+        "android_client_info": {
+          "package_name": "com.example.maslahah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148594308537-8f8s89a4u8os57b1dsgjumtmnj8koplv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.maslahah",
+            "certificate_hash": "c3d0730c928a2a49d6c2405ab0488a0990edd775"
+          }
+        },
+        {
+          "client_id": "148594308537-tk8ubdqb8j3epaus243vaurt4nus5gmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGlBrL7p1-gwOIuT8rD7c7vumXQuhUmjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148594308537-tk8ubdqb8j3epaus243vaurt4nus5gmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

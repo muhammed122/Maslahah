@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.OrderFragmentScreen">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gg"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintGuide_percent="0.1"
+        android:orientation="horizontal"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/icon_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/gg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_order_big_icon"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/num_of_orders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/icon_order"
+        android:textSize="@dimen/_16ssp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        tools:text="8"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:textColor="@color/main_color"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/guid_of_orders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num_of_orders"
+        android:textSize="@dimen/_14ssp"
+        android:text="@string/order_guide"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:textColor="@color/main_color"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/carve_card_background"
+    android:backgroundTint="@color/main_color"
+    tools:context=".ui.home.CurrentServiceScreen"
+    android:paddingTop="@dimen/_7sdp"
+    android:paddingBottom="@dimen/_10sdp">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:src="@drawable/ic_up_arrow"
+        android:tint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/current_service_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/v"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/current_service"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:padding="@dimen/_8sdp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_image"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/current_service_title" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/name"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toEndOf="@id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/current_service_title" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/user_service_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintStart_toEndOf="@id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_name_txt"
+        tools:text="Elsaid Gamal Abdulsalam" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/call_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/button_shape_2"
+        android:drawableTint="@color/accent_color"
+        android:drawableStart="@drawable/ic_call_icon"
+        android:fontFamily="@font/sf_ui_display_bold"
+        android:gravity="center"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:text="@string/call"
+        android:textColor="@color/accent_color"
+        app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
+
+    <View
+        android:id="@+id/v2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@color/white_shade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/call_btn" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/time_icon"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/ic_time_icon"
+        app:tint="@color/accent_color"
+        app:layout_constraintBottom_toBottomOf="@+id/service_date_time_txt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_appointment_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/appointment"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toEndOf="@id/time_icon"
+        app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_date_time_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textColor="@color/accent_color"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toEndOf="@id/time_icon"
+
+        app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
+        tools:text="23 Sept, 08:30 AM" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_duration_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/expected_duration"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_duration_value_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textColor="@color/accent_color"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="@+id/service_duration_txt"
+        app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
+        tools:text="3:4 Hours" />
+
+    <View
+        android:id="@+id/v3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@color/white_shade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/service_duration_value_txt" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_title_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/service_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v3" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_title_txt_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_medium"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@+id/service_title_txt"
+        tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
+Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
+
+
+    <View
+        android:id="@+id/v4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@color/white_shade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/service_title_txt_value" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_details_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/more_details"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v4" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_details_txt_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_medium"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@+id/service_details_txt"
+        tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
+Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
+
+
+    <View
+        android:id="@+id/v5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@color/white_shade"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/service_details_txt_value" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_papers_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:text="@string/required_paper"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/service_paper_txt_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:fontFamily="@font/sf_ui_display_medium"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintTop_toBottomOf="@+id/service_papers_txt"
+        tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
+Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:gravity="center"
+        android:weightSum="4"
+        app:layout_constraintTop_toBottomOf="@+id/service_paper_txt_value">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/start_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:background="@drawable/button_shape_2"
+            android:fontFamily="@font/sf_ui_display_bold"
+            android:gravity="center"
+            android:text="@string/start"
+            android:textAllCaps="false"
+            android:textColor="@color/accent_color"
+            app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/arrived_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_weight="1.2"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:background="@drawable/button_shape_2"
+            android:fontFamily="@font/sf_ui_display_bold"
+            android:gravity="center"
+            android:text="@string/iam_arrived"
+            android:textAllCaps="false"
+            android:textColor="@color/accent_color"
+            app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/myTurn_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:background="@drawable/button_shape_2"
+            android:fontFamily="@font/sf_ui_display_bold"
+            android:gravity="center"
+            android:text="@string/my_turn"
+            android:textAllCaps="false"
+            android:textColor="@color/accent_color"
+            app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

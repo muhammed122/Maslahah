@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/createAccountFragment">
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.example.maslahah.ui.auth.CreateAccountFragment"
+        android:label="fragment_create_account"
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_verifyFragment"
+            app:destination="@id/verifyFragment" />
+        <action
+            android:id="@+id/action_createAccountFragment_to_emailLoginScreen"
+            app:destination="@id/emailLoginScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailLoginScreen"
+        android:name="com.example.maslahah.ui.auth.EmailLoginScreen"
+        android:label="fragment_email_login_screen"
+        tools:layout="@layout/fragment_email_login_screen" >
+        <action
+            android:id="@+id/action_emailLoginScreen_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_emailLoginScreen_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_emailLoginScreen_to_getPasswordByEmailScreen"
+            app:destination="@id/getPasswordByEmailScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifyFragment"
+        android:name="com.example.maslahah.ui.auth.VerifyFragment"
+        android:label="fragment_verify"
+        tools:layout="@layout/fragment_verify" >
+        <argument
+            android:name="phone"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.maslahah.ui.auth.PhoneLoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_verifyFragment"
+            app:destination="@id/verifyFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/getPasswordByEmailScreen"
+        android:name="com.example.maslahah.ui.auth.GetPasswordByEmailScreen"
+        android:label="fragment_get_password_by_email_screen"
+        tools:layout="@layout/fragment_get_password_by_email_screen">
+
+        <action
+            android:id="@+id/action_getPasswordByEmailScreen_to_resetPasswordFragmentScreen"
+            app:destination="@id/resetPasswordFragmentScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/resetPasswordFragmentScreen"
+        android:name="com.example.maslahah.ui.auth.ResetPasswordFragmentScreen"
+        android:label="fragment_reset_password_screen"
+        tools:layout="@layout/fragment_reset_password_screen" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_resetPasswordFragmentScreen_to_emailLoginScreen"
+            app:destination="@id/emailLoginScreen"
+            app:popUpTo="@+id/auth_nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>
