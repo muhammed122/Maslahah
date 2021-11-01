@@ -96,6 +96,8 @@ class CurrentServiceScreen : Fragment() {
                     binding.v.setImageResource(R.drawable.ic_up_arrow)
                 }
             }
+
+
         }
 
         Log.d("dddddd", "onViewCreated: $currentServiceStatus ")

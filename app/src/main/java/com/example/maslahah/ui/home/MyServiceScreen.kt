@@ -1,12 +1,15 @@
 package com.example.maslahah.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +41,10 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
 
 
     private var detailsServiceView: ConstraintLayout? = null
-    private var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
+    companion object{
+        var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
+    }
+
 
     private fun initBottomSheet() {
         detailsServiceView = binding.detailsServiceLayout3.parentMyServiceDetailsLayout
@@ -76,6 +82,9 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         initBottomSheet()
         initRecyclerView()
         getServicesData()
+
+
+
     }
 
     private fun getServicesData() {
@@ -89,10 +98,10 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
                     if (snapshot.hasChildren()) {
                         for (data in snapshot.children) {
                             val service = data.getValue(ServiceData::class.java)!!
-                                servicesList.add(service)
+                            servicesList.add(service)
                         }
 
-                    }else{
+                    } else {
                         if (servicesList.size < 1)
                             binding.noLoadedTxt.visibility = View.VISIBLE
 
@@ -113,12 +122,14 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
 
     override fun serviceClickListener(serviceData: ServiceData) {
         Const.serviceId = serviceData.id!!
-      val v=  activity?.supportFragmentManager?.beginTransaction()
+        val v = activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.details_my_service_fragment, ServiceDetailsScreen())?.commit()
         Log.d("dddddddd all", "serviceClickListener: $v")
         detailsServiceSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
     }
+
+
 
 
 }

@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.maslahah.R
-import com.example.maslahah.databinding.FragmentProfileScreenBinding
 import com.example.maslahah.databinding.FragmentTasksScreenBinding
-import com.example.maslahah.ui.auth.ResetPasswordFragmentScreenArgs
 
 
 class TasksScreenFragment : Fragment() {

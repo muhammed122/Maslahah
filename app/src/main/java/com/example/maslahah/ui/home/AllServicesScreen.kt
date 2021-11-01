@@ -1,12 +1,15 @@
 package com.example.maslahah.ui.home
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -101,10 +104,9 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     if (snapshot.hasChildren()) {
                         serviceAdapter.setOneService(snapshot.getValue(ServiceData::class.java)!!)
-                        binding.noLoadedTxt.visibility=View.GONE
-                    }
-                    else
-                        binding.noLoadedTxt.visibility=View.VISIBLE
+                        binding.noLoadedTxt.visibility = View.GONE
+                    } else
+                        binding.noLoadedTxt.visibility = View.VISIBLE
 
                 }
 
@@ -130,15 +132,44 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
 
     override fun serviceClickListener(serviceData: ServiceData) {
         Const.serviceId = serviceData.id!!
-        val v=   activity?.supportFragmentManager?.beginTransaction()
+        val v = activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.details_service_fragment, ServiceDetailsScreen())?.commit()
-
-
-        Log.d("dddddddd all", "serviceClickListener: $v")
 
         detailsServiceSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
 
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        var time = false
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            when {
+                detailsServiceSheet.state != BottomSheetBehavior.STATE_COLLAPSED -> {
+                    detailsServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+                    return@addCallback
+                }
+                addServiceSheet.state != BottomSheetBehavior.STATE_COLLAPSED -> {
+                    addServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+                    return@addCallback
+                }
+
+                MyServiceScreen.detailsServiceSheet.state != BottomSheetBehavior.STATE_COLLAPSED ->{
+                    MyServiceScreen.detailsServiceSheet.state=BottomSheetBehavior.STATE_COLLAPSED
+                    return@addCallback
+                }
+                else -> {
+                    if (time) {
+                        activity?.finish()
+                        return@addCallback
+                    }
+                    time = true
+                    Toast.makeText(requireContext(), "click again to exit", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.myLooper()!!).postDelayed({ time = false }, 2000)
+                }
+            }
+        }
     }
 
 }

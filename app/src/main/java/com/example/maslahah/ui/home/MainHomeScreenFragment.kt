@@ -14,10 +14,13 @@ import java.util.*
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.widget.Adapter
 import java.text.SimpleDateFormat
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -63,12 +66,9 @@ class MainHomeScreenFragment : Fragment() {
         currentServiceSheet.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-
                 myBottomSheetListener?.onStateChange(newState)
             }
-
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
 
             }
         })
@@ -183,6 +183,8 @@ class MainHomeScreenFragment : Fragment() {
             })
 
     }
+
+
 
 
 }

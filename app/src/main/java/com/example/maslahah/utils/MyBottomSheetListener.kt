@@ -1,8 +1,8 @@
 package com.example.maslahah.utils
 
 interface MyBottomSheetListener {
+    fun onStateChange(state: Int)
 
 
-        fun onStateChange(state: Int)
 
 }
