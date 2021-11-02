@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent_service_details_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#9927425B"
+    android:layout_height="wrap_content"
+
     android:clickable="true"
     android:focusable="true"
     app:behavior_hideable="true"
@@ -16,7 +16,7 @@
         android:id="@+id/details_service_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
