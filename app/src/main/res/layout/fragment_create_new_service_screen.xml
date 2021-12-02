@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_3sdp"
+            android:textAlignment="viewStart"
             android:background="@drawable/edit_text_shape"
             android:hint="@string/title_exmple"
             android:inputType="text"
@@ -85,6 +86,7 @@
             android:background="@drawable/edit_text_shape"
             android:hint="@string/details_eaxmple"
             android:inputType="text"
+            android:textAlignment="viewStart"
             android:padding="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/service_desc_txt" />
 
@@ -154,6 +156,7 @@
             android:background="@drawable/edit_text_shape"
             android:hint="@string/duration_eaxmple"
             android:inputType="number"
+            android:textAlignment="viewStart"
             android:maxLength="2"
             android:padding="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/service_duration_txt" />
@@ -179,7 +182,8 @@
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/edit_text_shape"
             android:hint="@string/papers_eaxmple"
-            android:inputType="text"
+
+            android:textAlignment="viewStart"
             android:padding="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/service_paper_txt" />
 

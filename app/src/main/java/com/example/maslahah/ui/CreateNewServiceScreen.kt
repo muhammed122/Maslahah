@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
 import android.graphics.drawable.ColorDrawable
+import android.os.SystemClock
 import android.util.Log
 import java.text.DateFormatSymbols
 
@@ -80,6 +81,7 @@ class CreateNewServiceScreen : Fragment() {
         return inflater.inflate(R.layout.fragment_create_new_service_screen, container, false)
     }
 
+    private var clickTime = 0L
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCreateNewServiceScreenBinding.bind(view)
@@ -125,6 +127,12 @@ class CreateNewServiceScreen : Fragment() {
 
 
         binding.createServiceBtn.setOnClickListener {
+
+            if (SystemClock.elapsedRealtime() - clickTime < 1000) {
+                return@setOnClickListener
+            }
+
+            clickTime = SystemClock.elapsedRealtime()
             ProgressLoading.show(requireActivity())
             createNewService(
                 binding.serviceTitleEt.text.toString().trim(),
@@ -157,9 +165,11 @@ class CreateNewServiceScreen : Fragment() {
             ProgressLoading.dismiss()
             if (task.isSuccessful) {
                 databaseReference.child("myServices").child(userPhone)
-                    .child(id).setValue(ServiceData(
-                        id, userPhone, title, details, duration, papers, date, time
-                    ))
+                    .child(id).setValue(
+                        ServiceData(
+                            id, userPhone, title, details, duration, papers, date, time
+                        )
+                    )
                 clearData()
                 Toast.makeText(requireContext(), "successfully created", Toast.LENGTH_SHORT).show()
             } else {

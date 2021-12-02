@@ -8,6 +8,14 @@ import android.view.ViewGroup
 import com.example.maslahah.R
 import com.example.maslahah.databinding.FragmentBalanceScreenBinding
 import com.example.maslahah.databinding.FragmentTaxScreenBinding
+import android.graphics.Typeface
+
+import android.text.style.StyleSpan
+
+import android.text.SpannableString
+
+
+
 
 
 class BalanceFragmentScreen : Fragment() {
@@ -37,6 +45,15 @@ class BalanceFragmentScreen : Fragment() {
         _binding = FragmentBalanceScreenBinding.bind(view)
 
         binding.balanceValue.text = value.toString()
+
+
+        val spanString = SpannableString(" ${value.toString()} ")
+        spanString.setSpan(StyleSpan(Typeface.BOLD), 0, spanString.length, 0)
+        binding.guidOfBalance.text = resources.getString(R.string.balance_guide_first)
+        binding.guidOfBalance.append(spanString)
+        binding.guidOfBalance.append(resources.getString(R.string.balance_guide_second))
+
+
     }
 
 }

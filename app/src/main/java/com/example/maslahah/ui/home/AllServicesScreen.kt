@@ -47,6 +47,8 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
     private var addServiceSheet = BottomSheetBehavior<ConstraintLayout>()
 
 
+    lateinit var listener: ChildEventListener
+
     private fun initBottomSheet() {
         detailsServiceView = binding.detailsServiceLayout2.parentServiceDetailsLayout
         detailsServiceSheet = BottomSheetBehavior.from(detailsServiceView!!)
@@ -97,9 +99,15 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
 
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        databaseReference.child("services").orderByChild("selected").equalTo(false)
+            .removeEventListener(listener)
+    }
+
     private fun getServicesData() {
         ProgressLoading.show(requireActivity())
-        databaseReference.child("services").orderByChild("selected").equalTo(false)
+        listener = databaseReference.child("services").orderByChild("selected").equalTo(false)
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     if (snapshot.hasChildren()) {
@@ -155,8 +163,8 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
                     return@addCallback
                 }
 
-                MyServiceScreen.detailsServiceSheet.state != BottomSheetBehavior.STATE_COLLAPSED ->{
-                    MyServiceScreen.detailsServiceSheet.state=BottomSheetBehavior.STATE_COLLAPSED
+                MyServiceScreen.detailsServiceSheet.state != BottomSheetBehavior.STATE_COLLAPSED -> {
+                    MyServiceScreen.detailsServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
                     return@addCallback
                 }
                 else -> {
@@ -165,7 +173,8 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
                         return@addCallback
                     }
                     time = true
-                    Toast.makeText(requireContext(), "click again to exit", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "click again to exit", Toast.LENGTH_SHORT)
+                        .show()
                     Handler(Looper.myLooper()!!).postDelayed({ time = false }, 2000)
                 }
             }

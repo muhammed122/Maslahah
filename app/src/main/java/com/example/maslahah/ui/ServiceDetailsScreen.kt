@@ -65,6 +65,8 @@ class ServiceDetailsScreen : Fragment() {
             addServiceToUser()
         }
 
+
+
     }
 
 
@@ -80,9 +82,9 @@ class ServiceDetailsScreen : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     service = snapshot.getValue(ServiceData::class.java)
-                    if (service!=null)
-                    showServiceDetails(service!!)
-
+                    if (service!=null) {
+                        showServiceDetails(service!!)
+                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -110,7 +112,10 @@ class ServiceDetailsScreen : Fragment() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val user = snapshot.getValue(UserData::class.java)
-                    showServiceUserData(user!!)
+                    Log.d("dddddd", "onDataChange: user $user")
+
+                    if (user!=null)
+                    showServiceUserData(user)
 
                 }
 

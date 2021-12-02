@@ -84,7 +84,7 @@ class ProfileFragmentScreen : Fragment() {
         binding.yourTax.setOnClickListener {
             navController.navigate(
                 ProfileFragmentScreenDirections.actionProfileFragmentScreenToTaxScreenFragment(
-                    userdata?.tax!!.toFloat()
+                    userdata?.tax!!.toFloat() , userdata?.balance!!.toFloat()
                 )
             )
         }

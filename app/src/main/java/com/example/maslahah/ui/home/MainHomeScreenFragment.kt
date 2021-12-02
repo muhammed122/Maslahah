@@ -185,6 +185,9 @@ class MainHomeScreenFragment : Fragment() {
     }
 
 
+    override fun onSaveInstanceState(outState: Bundle) {
+
+    }
 
 
 }

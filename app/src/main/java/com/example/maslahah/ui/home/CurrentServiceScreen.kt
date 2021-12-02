@@ -33,6 +33,8 @@ import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import android.content.DialogInterface
+import androidx.appcompat.app.AlertDialog
 
 
 const val TOPIC = "/topics/myTopic2"
@@ -59,6 +61,8 @@ class CurrentServiceScreen : Fragment() {
 
     var serviceStatus = 1
     var currentServiceStatus = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userAvailable = MyPreference.getPrefBoolean("available")
@@ -73,7 +77,6 @@ class CurrentServiceScreen : Fragment() {
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -107,24 +110,22 @@ class CurrentServiceScreen : Fragment() {
 
         binding.startBtn.setOnClickListener {
             if (currentServiceStatus == 1)
-                databaseReference.child("current_service")
-                    .child(phone).child("serviceStatus").setValue(2)
+                showConfirmDialog(2)
             else if (currentServiceStatus == 4)
-                databaseReference.child("current_service")
-                    .child(phone).child("serviceStatus").setValue(5)
+                showConfirmDialog(5)
 
 
         }
         binding.arrivedBtn.setOnClickListener {
             if (currentServiceStatus == 2)
-                databaseReference.child("current_service")
-                    .child(phone).child("serviceStatus").setValue(3)
+                showConfirmDialog(3)
+
 
         }
         binding.myTurnBtn.setOnClickListener {
             if (currentServiceStatus == 3)
-                databaseReference.child("current_service")
-                    .child(phone).child("serviceStatus").setValue(4)
+                showConfirmDialog(4)
+
 
         }
 
@@ -138,16 +139,20 @@ class CurrentServiceScreen : Fragment() {
             getServiceDetails()
 
     }
-
     private fun getServiceDetails() {
         ProgressLoading.show(requireActivity())
-        databaseReference.child("services").child(currentServiceId)
+     databaseReference.child("services").child(currentServiceId)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val service = snapshot.getValue(ServiceData::class.java)
-
                     if (service != null) {
                         currentServiceData = service
+                        binding.whatsapp.setOnClickListener {
+                            val url = "https://api.whatsapp.com/send?phone=20${service.serviceOwnerPhone}"
+                            val i = Intent(Intent.ACTION_VIEW)
+                            i.data = Uri.parse(url)
+                            startActivity(i)
+                        }
                         showServiceDetails(service)
                     }
                     ProgressLoading.dismiss()
@@ -171,8 +176,6 @@ class CurrentServiceScreen : Fragment() {
         binding.serviceDurationValueTxt.text =
             "${service.duration} : ${service.duration?.toInt()?.plus(1)} Hours"
         binding.servicePaperTxtValue.text = service.papers
-
-
     }
 
     private fun getServiceOwnerData(serviceOwnerPhone: String?) {
@@ -257,7 +260,7 @@ class CurrentServiceScreen : Fragment() {
                                     PushNotification(
                                         NotificationData(
                                             "service state",
-                                            "Your ${currentServiceData.title} accepted from ${userService.name}"
+                                            "Your ${currentServiceData.title} accepted from ${user.name}"
                                         ),
                                         userService.userToken!!
                                     )
@@ -275,7 +278,7 @@ class CurrentServiceScreen : Fragment() {
                                     PushNotification(
                                         NotificationData(
                                             "service state",
-                                            "Your ${currentServiceData.title} started from ${userService.name}"
+                                            "Your ${currentServiceData.title} started from ${user.name}"
                                         ),
                                         userService.userToken!!
                                     )
@@ -293,7 +296,7 @@ class CurrentServiceScreen : Fragment() {
                                     PushNotification(
                                         NotificationData(
                                             "service state",
-                                            "${userService.name}  arrived to ${currentServiceData.title}  place"
+                                            "${user.name}  arrived to ${currentServiceData.title}  place"
                                         ),
                                         userService.userToken!!
                                     )
@@ -319,7 +322,7 @@ class CurrentServiceScreen : Fragment() {
                                     PushNotification(
                                         NotificationData(
                                             "service state",
-                                            "${userService.name}  finished your service ${currentServiceData.title}"
+                                            "${user.name}  finished your service ${currentServiceData.title}"
                                         ),
                                         userService.userToken!!
                                     )
@@ -402,6 +405,29 @@ class CurrentServiceScreen : Fragment() {
                 Log.e("ddddd", e.toString())
             }
         }
+
+    }
+
+
+    private fun showConfirmDialog(value: Int) {
+
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setCancelable(true)
+        builder.setTitle("Current Service")
+        builder.setMessage("Are You Sure ?")
+        builder.setPositiveButton("Confirm",
+            DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+                databaseReference.child("current_service")
+                    .child(phone).child("serviceStatus").setValue(value)
+
+            })
+        builder.setNegativeButton(android.R.string.cancel,
+            DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
 
     }
 

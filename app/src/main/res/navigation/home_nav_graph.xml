@@ -70,5 +70,8 @@
         <argument
             android:name="value"
             app:argType="float" />
+        <argument
+            android:name="balance"
+            app:argType="float" />
     </fragment>
 </navigation>

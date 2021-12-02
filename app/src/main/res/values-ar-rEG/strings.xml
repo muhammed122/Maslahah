@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Maslahah</string>
+    <string name="welcome_to" translatable="false">اهلا بك في</string>
+    <string name="lets_set_acc" translatable="false">لنقم بتعيين حسابك</string>
+    <string name="name" translatable="false">الاسم</string>
+    <string name="email" translatable="false">ادخل البريد الخاص بك</string>
+    <string name="phone" translatable="false">ادخل رقم الموبايل</string>
+    <string name="password" translatable="false">ادخل كلمة السر</string>
+    <string name="create_account" translatable="false">انشاء حساب</string>
+    <string name="signin_guid_message">تسجيل دخول برقم الموبايل</string>
+    <string name="signin_guid_message2">تسجيل دخول بالبريد و كلمة السر</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="or">او</string>
+    <string name="login_email">تسجيل دخول بالبريد و كلمة السر</string>
+    <string name="login_phone">تسجيل دخول برقم الموبايل</string>
+    <string name="forget_password">نسيت كلمة السر؟</string>
+    <string name="welcome_back" translatable="false">مرحبا بعودتك !</string>
+    <string name="otp_verification">التحقق من الكود السري</string>
+    <string name="check_opt">تحقق من رسائل SMS الخاصة بك ، لقد أرسلنا لك رقم التعريف الشخصي</string>
+    <string name="verify">تحقق لتسجيل الدخول</string>
+    <string name="have_acc">هل لديك حساب؟</string>
+    <string name="not_have_acc">ليس لديك حساب؟</string>
+    <string name="siginup">انشاء حساب</string>
+    <string name="external_storage_message">السماح باستخدام التخزين</string>
+    <string name="create_service">انشاء خدمة جديدة</string>
+    <string name="service_title">العنوان</string>
+    <string name="title_exmple">على سبيل المثال:استخراج اوراق من بنك</string>
+    <string name="more_details">تفاصيل الخدمة</string>
+    <string name="details_eaxmple">على سبيل المثال: الموقع في</string>
+    <string name="appointment">معاد التسليم</string>
+    <string name="expected_duration">المدة المتوقعة</string>
+    <string name="duration_eaxmple">على سبيل المثال: الانتظار من 3: 5 ساعات</string>
+    <string name="required_paper">الأوراق المطلوبة</string>
+    <string name="papers_eaxmple">على سبيل المثال: بطاقة الهوية ، الصورة الشخصية..إلخ</string>
+    <string name="create_service_btn">إنشاء الخدمة</string>
+    <string name="call">مكالمة</string>
+    <string name="accept_this_service">قبول هذه الخدمة</string>
+    <string name="today">اليوم</string>
+    <string name="all_services">جميع الخدمات</string>
+    <string name="my_services">خدماتي</string>
+    <string name="no_services_loaded">لم يتم تحميل أي خدمات</string>
+    <string name="start">بدأ؟</string>
+    <string name="iam_arrived">لقد وصلت</string>
+    <string name="my_turn">دوري الآن</string>
+    <string name="current_service">الخدمة الحالية</string>
+    <string name="user_have_other_service">أنت بالفعل في الخدمة</string>
+    <string name="service_accepted_from_other_user">هذه الخدمة مقبولة من مستخدم آخر</string>
+    <string name="can_not_accept_your_service">لا يمكن قبول خدمتك</string>
+    <string name="done_terminate">تم ، إنهاء؟</string>
+    <string name="service_done">تمت الخدمة!</string>
+    <string name="worng_phone_number">رقم هاتف خاطئ</string>
+    <string name="my_profile">الحساب</string>
+    <string name="tasks">المهام</string>
+    <string name="my_balance">الرصيد</string>
+    <string name="tasks_your_accomplished">المهام التي أنجزتها</string>
+    <string name="tax">ضريبة</string>
+    <string name="language">لغة</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="you_have_service">لديك خدمة</string>
+    <string name="your_balance">رصيدك</string>
+    <string name="tax_you_have_to_pay_it">الضريبة عليك أن تدفعها</string>
+    <string name="reset">إعادة ضبط</string>
+    <string name="reset_password">إعادة تعيين كلمة المرور!</string>
+    <string name="reset_guid_message">حسنًا ، الأمر سهل فقط أرسل رقمك</string>
+    <string name="new_password">كلمة مرور جديدة</string>
+    <string name="new_password_guid_message2">لا بأس لكن تذكرها جيدًا هذه المرة</string>
+    <string name="confirm">يتأكد</string>
+    <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
+    <string name="order_guide">لقد طلبت 8 مرات حتى الآن استمر في العمل نحن هنا لتوفير وقتك</string>
+    <string name="balance_guide_first">رائع! لقد حصلت على</string>
+    <string name="balance_guide_second">جنيه استرليني حتى الآن ، فأنت نجم كبير ولكن لا تنسى دفع ضرائبك</string>
+    <string name="tax_guide">رائع! لقد ربحت 2438 جنيه حتى الآن أنت نجم سوبر لكن لا تنسى أن تدفع ضريبتك يجب أن تدفع مقابل هذه الخدمة 539 جنيه.</string>
+    <string name="task_guide">رائعة! لقد أنجزت هذا العدد من المهام حتى الآن استمر</string>
+</resources>

@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/balance_value"
         android:textSize="@dimen/_14ssp"
-        android:text="@string/balance_guide"
+
         android:layout_marginVertical="@dimen/_5sdp"
         android:textColor="@color/main_color"/>
 

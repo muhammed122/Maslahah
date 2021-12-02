@@ -40,8 +40,11 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
     private lateinit var databaseReference: DatabaseReference
 
 
+    lateinit var listener: ValueEventListener
+
     private var detailsServiceView: ConstraintLayout? = null
-    companion object{
+
+    companion object {
         var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
     }
 
@@ -84,40 +87,48 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         getServicesData()
 
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val phone = MyPreference.getPrefString("userPhone")
+        databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
+            .removeEventListener(listener)
 
     }
 
     private fun getServicesData() {
         ProgressLoading.show(requireActivity())
         val phone = MyPreference.getPrefString("userPhone")
-        databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    servicesList.clear()
+        listener =
+            databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        servicesList.clear()
 
-                    if (snapshot.hasChildren()) {
-                        for (data in snapshot.children) {
-                            val service = data.getValue(ServiceData::class.java)!!
-                            servicesList.add(service)
+                        if (snapshot.hasChildren()) {
+                            for (data in snapshot.children) {
+                                val service = data.getValue(ServiceData::class.java)!!
+                                servicesList.add(service)
+                            }
+
+                        } else {
+                            if (servicesList.size < 1)
+                                binding.noLoadedTxt.visibility = View.VISIBLE
+
+
                         }
-
-                    } else {
-                        if (servicesList.size < 1)
-                            binding.noLoadedTxt.visibility = View.VISIBLE
-
+                        serviceAdapter.setServices(servicesList)
+                        ProgressLoading.dismiss()
 
                     }
-                    serviceAdapter.setServices(servicesList)
-                    ProgressLoading.dismiss()
 
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    ProgressLoading.dismiss()
-                    binding.noLoadedTxt.visibility = View.VISIBLE
-                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onCancelled(error: DatabaseError) {
+                        ProgressLoading.dismiss()
+                        binding.noLoadedTxt.visibility = View.VISIBLE
+                        Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+                    }
+                })
     }
 
     override fun serviceClickListener(serviceData: ServiceData) {
@@ -128,8 +139,6 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         detailsServiceSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
     }
-
-
 
 
 }
