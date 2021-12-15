@@ -1,6 +1,8 @@
 package com.example.maslahah.ui.home
 
 import android.Manifest
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -77,6 +79,7 @@ class CurrentServiceScreen : Fragment() {
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -103,30 +106,15 @@ class CurrentServiceScreen : Fragment() {
 
         }
 
-        Log.d("dddddd", "onViewCreated: $currentServiceStatus ")
-        if (currentServiceStatus > 1) {
-            binding.startBtn.text = resources.getString(R.string.done_terminate)
+
+
+
+        binding.cancelBtn.setOnClickListener {
+            showConfirmDialog(2, resources.getString(R.string.cancel_message))
         }
 
-        binding.startBtn.setOnClickListener {
-            if (currentServiceStatus == 1)
-                showConfirmDialog(2)
-            else if (currentServiceStatus == 4)
-                showConfirmDialog(5)
-
-
-        }
-        binding.arrivedBtn.setOnClickListener {
-            if (currentServiceStatus == 2)
-                showConfirmDialog(3)
-
-
-        }
-        binding.myTurnBtn.setOnClickListener {
-            if (currentServiceStatus == 3)
-                showConfirmDialog(4)
-
-
+        binding.doneBtn.setOnClickListener {
+            showConfirmDialog(3, resources.getString(R.string.done_message))
         }
 
 
@@ -135,20 +123,28 @@ class CurrentServiceScreen : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (currentServiceId != "")
-            getServiceDetails()
+
 
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if (currentServiceId != "")
+            getServiceDetails()
+    }
+
+
     private fun getServiceDetails() {
-        ProgressLoading.show(requireActivity())
-     databaseReference.child("services").child(currentServiceId)
+        ProgressLoading.show()
+        databaseReference.child("services").child(currentServiceId)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val service = snapshot.getValue(ServiceData::class.java)
                     if (service != null) {
                         currentServiceData = service
                         binding.whatsapp.setOnClickListener {
-                            val url = "https://api.whatsapp.com/send?phone=20${service.serviceOwnerPhone}"
+                            val url =
+                                "https://api.whatsapp.com/send?phone=20${service.serviceOwnerPhone}"
                             val i = Intent(Intent.ACTION_VIEW)
                             i.data = Uri.parse(url)
                             startActivity(i)
@@ -173,8 +169,7 @@ class CurrentServiceScreen : Fragment() {
         binding.serviceTitleTxtValue.text = service.title
         binding.serviceDetailsTxtValue.text = service.details
         binding.serviceDateTimeTxt.text = "${service.date}, ${service.time}"
-        binding.serviceDurationValueTxt.text =
-            "${service.duration} : ${service.duration?.toInt()?.plus(1)} Hours"
+        binding.servicePriceValueTxt.text = "${service.price} LE"
         binding.servicePaperTxtValue.text = service.papers
     }
 
@@ -201,7 +196,14 @@ class CurrentServiceScreen : Fragment() {
     private fun showServiceUserData(user: UserData) {
         userServicePhone = user.phone!!
         binding.userServiceNameTxt.text = user.name
-        Glide.with(requireContext()).load(user.image).into(binding.userImage)
+        if (user.image == "")
+            binding.userImage.setImageResource(R.drawable.ic_avatar)
+        else {
+            val activity = activity
+            if (activity != null)
+                Glide.with(activity).load(user.image).into(binding.userImage)
+
+        }
         ProgressLoading.dismiss()
 
         binding.callBtn.setOnClickListener {
@@ -278,45 +280,38 @@ class CurrentServiceScreen : Fragment() {
                                     PushNotification(
                                         NotificationData(
                                             "service state",
-                                            "Your ${currentServiceData.title} started from ${user.name}"
+                                            "Your ${currentServiceData.title} canceled from ${user.name}"
                                         ),
                                         userService.userToken!!
                                     )
                                 )
-                                binding.startBtn.text = resources.getString(R.string.done_terminate)
-                                MyPreference.setPrefInt("serviceStatus", 2)
-                                currentServiceStatus = 2
 
+                                MyPreference.setPrefInt("serviceStatus", 1)
+                                currentServiceStatus = 1
+
+                                //remove current service
+                                databaseReference.child("current_service").child(phone)
+                                    .removeValue()
+
+                                //make user free
+                                databaseReference.child("users").child(phone)
+                                    .child("available").setValue(true)
+
+                                service.selected = false
+                                databaseReference.child("services").child(service.id!!)
+                                    .setValue(service)
+
+                                val tax = 10.plus(user.tax!!)
+                                MyPreference.setPrefInt("userTax", tax.toInt())
+                                databaseReference.child("users").child(phone)
+                                    .child("tax").setValue(tax)
+
+                                databaseReference.child("current_service")
+                                    .child(phone).child("serviceStatus").setValue(0)
                             }
                             return
                         }
                         3 -> {
-                            if (currentServiceStatus == 2) {
-                                sendNotification(
-                                    PushNotification(
-                                        NotificationData(
-                                            "service state",
-                                            "${user.name}  arrived to ${currentServiceData.title}  place"
-                                        ),
-                                        userService.userToken!!
-                                    )
-                                )
-
-                                binding.arrivedBtn.isEnabled = false
-                                serviceStatus = 3
-                                MyPreference.setPrefInt("serviceStatus", 3)
-                                currentServiceStatus = 3
-                            }
-                            return
-                        }
-                        4 -> {
-                            binding.myTurnBtn.isEnabled = false
-                            serviceStatus = 4
-                            MyPreference.setPrefInt("serviceStatus", 4)
-                            currentServiceStatus = 4
-                            return
-                        }
-                        5 -> {
                             if (currentServiceStatus != 5) {
                                 sendNotification(
                                     PushNotification(
@@ -328,11 +323,11 @@ class CurrentServiceScreen : Fragment() {
                                     )
                                 )
                                 MyPreference.setPrefInt("serviceStatus", 0)
-                                Toast.makeText(
-                                    requireContext(),
-                                    resources.getString(R.string.service_done),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+//                                Toast.makeText(
+//                                    requireContext(),
+//                                    resources.getString(R.string.service_done),
+//                                    Toast.LENGTH_SHORT
+//                                ).show()
 
                                 serviceStatus = 1
                                 //remove current service
@@ -349,11 +344,15 @@ class CurrentServiceScreen : Fragment() {
                                     .child(service.id!!).setValue(service)
 
                                 //add balance and tasks to user
-                                val balance = service.duration?.toInt()?.plus(1)?.times(10)
-                                    ?.plus(user.balance!!)
+                                val balance = service.price?.plus(user.balance!!)
+                                val tax = 10.plus(user.tax!!)
 
                                 databaseReference.child("users").child(phone)
+                                    .child("tax").setValue(tax)
+                                databaseReference.child("users").child(phone)
                                     .child("balance").setValue(balance)
+
+
 
                                 databaseReference.child("users").child(phone).child("tasks")
                                     .setValue(
@@ -362,6 +361,7 @@ class CurrentServiceScreen : Fragment() {
 
                                 MyPreference.savePrefFloat("userBalance", balance?.toFloat()!!)
                                 MyPreference.setPrefInt("userTasks", user.tasks?.plus(1)!!)
+                                MyPreference.setPrefInt("userTax", tax.toInt())
 
 
                                 // remove from all services
@@ -384,9 +384,8 @@ class CurrentServiceScreen : Fragment() {
 
 
     private fun sendNotification(notification: PushNotification) {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         CoroutineScope(Dispatchers.IO).launch {
-
             try {
                 val response = RetrofitInstance.api.postNotification(notification)
                 if (response.isSuccessful) {
@@ -409,13 +408,12 @@ class CurrentServiceScreen : Fragment() {
     }
 
 
-    private fun showConfirmDialog(value: Int) {
-
+    private fun showConfirmDialog(value: Int, message: String) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.setCancelable(true)
         builder.setTitle("Current Service")
-        builder.setMessage("Are You Sure ?")
-        builder.setPositiveButton("Confirm",
+        builder.setMessage(message)
+        builder.setPositiveButton(resources.getString(R.string.confirm),
             DialogInterface.OnClickListener { dialog, which ->
                 dialog.dismiss()
                 databaseReference.child("current_service")

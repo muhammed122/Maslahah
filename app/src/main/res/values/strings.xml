@@ -33,6 +33,7 @@
     <string name="time_eaxmple" translatable="false">08:30 AM</string>
     <string name="expected_duration" translatable="false">Expected Duration</string>
     <string name="duration_eaxmple" translatable="false">for example: waiting from 3:5 Hours</string>
+    <string name="price_eaxmple" translatable="false">for example: 50 LE</string>
     <string name="required_paper" translatable="false">Required Papers</string>
     <string name="papers_eaxmple" translatable="false">for example: ID, Personal photo..etc</string>
     <string name="create_service_btn" translatable="false">Create Service</string>
@@ -75,4 +76,29 @@
     <string name="balance_guide_second" translatable="false"> LE till now keep Going you are super star but don’t forget to pay your tax</string>
     <string name="tax_guide" translatable="false">WOW! you earned 2438 LE till now keep Going you are super star but don’t forget to pay your tax you should pay for this service 539 LE</string>
     <string name="task_guide" translatable="false">Great! you have accomplished this number of tasks till now keep going</string>
+
+
+    <string name="facebook_app_id" translatable="false">285643153505292</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb285643153505292</string>
+
+    <string name="add_phone_message">please add phone to complete registration</string>
+    <string name="communication_info">communication info</string>
+    <string name="continue_with_google">Continue With Google</string>
+    <string name="price_of_service">Price of service</string>
+    <string name="edit_service">Edit Service Data</string>
+    <string name="edit">Edit</string>
+    <string name="successfully_updated">Successfully updated</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_message">If you cancel this service you will pay 10 LE Financial penalty </string>
+    <string name="done_message">Did you finish this service ?</string>
+    <string name="terms_polices"><![CDATA[Terms & Policy]]></string>
+    <string name="terms_agree">you have should agree on terms and policy</string>
+    <string name="terms_content">1- you should insert correct phone \n
+        2- if you have more than 200 LE as Tax \n your account will be suspended -\n
+    3- you should send money using Vodafone cash service -\n
+    4- send money to this number 010888888888</string>
+
+
+    <string name="suspended_message">Your account has been suspended until the tax due is paid </string>
+
 </resources>

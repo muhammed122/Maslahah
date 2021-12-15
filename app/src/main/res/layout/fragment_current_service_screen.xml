@@ -163,7 +163,7 @@
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:fontFamily="@font/sf_ui_display_semibold"
-        android:text="@string/expected_duration"
+        android:text="@string/price_of_service"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
 
@@ -171,16 +171,17 @@
         app:layout_constraintTop_toBottomOf="@+id/v2" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/service_duration_value_txt"
+        android:id="@+id/service_price_value_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:fontFamily="@font/sf_ui_display_semibold"
+        android:fontFamily="@font/cairo_bold"
         android:textColor="@color/accent_color"
         android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="@+id/service_duration_txt"
         app:layout_constraintStart_toStartOf="@+id/service_duration_txt"
         app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
-        tools:text="3:4 Hours" />
+        tools:text="30 LE" />
 
     <View
         android:id="@+id/v3"
@@ -192,7 +193,7 @@
         android:background="@color/white_shade"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/service_duration_value_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/service_price_value_txt" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -309,47 +310,34 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         app:layout_constraintTop_toBottomOf="@+id/service_paper_txt_value">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start_btn"
+            android:id="@+id/done_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.2"
+            android:layout_weight="1.8"
             android:background="@drawable/button_shape_2"
             android:fontFamily="@font/sf_ui_display_bold"
             android:gravity="center"
-            android:text="@string/start"
+            android:backgroundTint="@color/accent_color"
+            android:text="@string/done_terminate"
             android:textAllCaps="false"
             android:textColor="@color/accent_color"
             app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/arrived_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_weight="1.2"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:background="@drawable/button_shape_2"
-            android:fontFamily="@font/sf_ui_display_bold"
-            android:gravity="center"
-            android:text="@string/iam_arrived"
-            android:textAllCaps="false"
-            android:textColor="@color/accent_color"
-            app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/myTurn_btn"
+            android:id="@+id/cancel_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1.3"
+            android:layout_weight="1.8"
             android:paddingHorizontal="@dimen/_5sdp"
             android:background="@drawable/button_shape_2"
             android:fontFamily="@font/sf_ui_display_bold"
             android:gravity="center"
-            android:text="@string/my_turn"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="@color/accent_color"
             app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"

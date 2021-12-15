@@ -50,7 +50,8 @@ object MyPreference {
             putInt("userTasks", user.tasks!!)
             putBoolean("available", user.available!!)
             putFloat("userBalance", user.balance?.toFloat()!!)
-            putFloat("userTax", user.tax?.toFloat()!!)
+            putInt("userTax", user.tax?.toInt()!!)
+            putString("userStatus", user.status!!)
         }?.apply()
 
     }
@@ -62,11 +63,10 @@ object MyPreference {
             email = getSharedPreferences()?.getString("userEmail", "")!!,
             tasks = getSharedPreferences()?.getInt("userTasks", 0)!!,
             balance = getSharedPreferences()?.getFloat("userBalance", 0.0F)!!.toDouble(),
-            tax = getSharedPreferences()?.getFloat(
-                "userTax", 0.0F
-            )!!.toDouble(),
+            tax = getSharedPreferences()?.getInt("userTax", 0),
             image = getSharedPreferences()?.getString("userImage", "")!!,
-            available = getSharedPreferences()?.getBoolean("available", false)
+            available = getSharedPreferences()?.getBoolean("available", false),
+            status = getSharedPreferences()?.getString("userStatus", "true")!!,
         )
 
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -135,23 +136,23 @@
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:fontFamily="@font/sf_ui_display_semibold"
-        android:text="@string/expected_duration"
+        android:text="@string/price_of_service"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v2" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/service_duration_value_txt"
+        android:id="@+id/service_price_value_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf_ui_display_semibold"
+        android:fontFamily="@font/cairo_bold"
         android:textColor="@color/accent_color"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="@+id/service_duration_txt"
-        app:layout_constraintStart_toEndOf="@+id/service_date_time_txt"
+        app:layout_constraintStart_toStartOf="@+id/service_duration_txt"
         app:layout_constraintTop_toBottomOf="@+id/service_appointment_txt"
-        tools:text="3:4 Hours" />
+        tools:text="30 LE" />
 
     <View
         android:id="@+id/v3"
@@ -163,7 +164,7 @@
         android:background="@color/stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/service_duration_value_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/service_price_value_txt" />
 
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -59,7 +59,7 @@ class GetPasswordByEmailScreen : Fragment() {
         enableConfirmButton()
 
         binding.resetBtn.setOnClickListener {
-            ProgressLoading.show(requireActivity())
+            ProgressLoading.show()
             resetPasswordByEmail(binding.emailReset.text.toString().trim())
         }
 

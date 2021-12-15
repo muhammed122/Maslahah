@@ -1,7 +1,6 @@
 package com.example.maslahah.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,33 +10,18 @@ import com.example.maslahah.R
 import com.example.maslahah.databinding.FragmentMainHomeScreenBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.util.*
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
-import android.widget.Adapter
-import java.text.SimpleDateFormat
-import android.widget.DatePicker
 import android.widget.Toast
-import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.maslahah.data.ServiceData
 import com.example.maslahah.ui.NotificationActivityScreen
-import com.example.maslahah.ui.ServiceDetailsScreen
-import com.example.maslahah.ui.adapter.ServiceAdapter
-import com.example.maslahah.ui.adapter.ServiceItemClickListener
 import com.example.maslahah.ui.adapter.TabLayoutAdapter
-import com.example.maslahah.ui.auth.EmailLoginScreenDirections
 import com.example.maslahah.utils.MyBottomSheetListener
 import com.example.maslahah.utils.MyPreference
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.database.*
-import kotlin.collections.ArrayList
 
 
 class MainHomeScreenFragment : Fragment() {
@@ -49,7 +33,6 @@ class MainHomeScreenFragment : Fragment() {
 
     private var currentServiceView: ConstraintLayout? = null
     private var currentServiceSheet = BottomSheetBehavior<ConstraintLayout>()
-
 
 
     lateinit var navController: NavController
@@ -68,6 +51,7 @@ class MainHomeScreenFragment : Fragment() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 myBottomSheetListener?.onStateChange(newState)
             }
+
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
@@ -135,9 +119,19 @@ class MainHomeScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMainHomeScreenBinding.bind(view)
-        Glide.with(requireContext()).load(MyPreference.getPrefString("userImage")).into(
-            binding.userImageToolbar
-        )
+
+        val image = MyPreference.getPrefString("userImage")
+
+        if (image != "")
+            Glide.with(requireContext()).load(image).into(
+                binding.userImageToolbar
+            )
+        else
+            binding.userImageToolbar.setImageResource(R.drawable.ic_avatar)
+
+
+
+
         navController = Navigation.findNavController(requireView())
         setUpTabLayoutWithViewPager()
         initBottomSheet()
@@ -165,8 +159,10 @@ class MainHomeScreenFragment : Fragment() {
                     if (snapshot.getValue(Boolean::class.java) == false) {
                         activity?.supportFragmentManager?.beginTransaction()
                             ?.replace(R.id.current_service_fragment, CurrentServiceScreen())
-                            ?.commit()
+                            ?.commitNowAllowingStateLoss()
 
+                        AllServicesScreen.detailsServiceSheet.state =
+                            BottomSheetBehavior.STATE_COLLAPSED
                         currentServiceSheet.peekHeight = 450
                         MyPreference.setPrefBoolean("available", false)
                     } else {
@@ -182,10 +178,38 @@ class MainHomeScreenFragment : Fragment() {
                 }
             })
 
+
+        databaseReference.child("users").child(phone).child("tax")
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.getValue(Int::class.java)!! >= 200)
+                        showSuspendDialog()
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
     }
 
 
     override fun onSaveInstanceState(outState: Bundle) {
+//        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+//        super.onSaveInstanceState(outState);
+    }
+
+    private fun showSuspendDialog() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val factory = LayoutInflater.from(requireContext())
+        val view = factory.inflate(R.layout.suspend_dialog_layout, null);
+        builder.setView(view)
+        builder.setCancelable(false)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
 
     }
 

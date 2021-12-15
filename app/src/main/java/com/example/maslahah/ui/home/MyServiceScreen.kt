@@ -44,6 +44,7 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
 
     private var detailsServiceView: ConstraintLayout? = null
 
+
     companion object {
         var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
     }
@@ -53,6 +54,10 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         detailsServiceView = binding.detailsServiceLayout3.parentMyServiceDetailsLayout
         detailsServiceSheet = BottomSheetBehavior.from(detailsServiceView!!)
         detailsServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+
+
+
+
     }
 
     private fun initRecyclerView() {
@@ -82,23 +87,26 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMyServiceScreenBinding.bind(view)
 
+
         initBottomSheet()
         initRecyclerView()
         getServicesData()
-
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         val phone = MyPreference.getPrefString("userPhone")
-        databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
+        databaseReference.child("services")
+            .orderByChild("serviceOwnerPhone")
+            .equalTo(phone)
             .removeEventListener(listener)
+
+        _binding=null
 
     }
 
     private fun getServicesData() {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         val phone = MyPreference.getPrefString("userPhone")
         listener =
             databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
@@ -107,15 +115,14 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
                         servicesList.clear()
 
                         if (snapshot.hasChildren()) {
+                            binding.noLoadedTxt.visibility = View.GONE
                             for (data in snapshot.children) {
                                 val service = data.getValue(ServiceData::class.java)!!
                                 servicesList.add(service)
                             }
 
                         } else {
-                            if (servicesList.size < 1)
                                 binding.noLoadedTxt.visibility = View.VISIBLE
-
 
                         }
                         serviceAdapter.setServices(servicesList)
@@ -134,8 +141,8 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
     override fun serviceClickListener(serviceData: ServiceData) {
         Const.serviceId = serviceData.id!!
         val v = activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.details_my_service_fragment, ServiceDetailsScreen())?.commit()
-        Log.d("dddddddd all", "serviceClickListener: $v")
+            ?.replace(R.id.details_my_service_fragment, EditServiceScreenFragment())?.commit()
+
         detailsServiceSheet.state = BottomSheetBehavior.STATE_EXPANDED
 
     }

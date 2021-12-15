@@ -133,11 +133,11 @@ class CreateNewServiceScreen : Fragment() {
             }
 
             clickTime = SystemClock.elapsedRealtime()
-            ProgressLoading.show(requireActivity())
+            ProgressLoading.show()
             createNewService(
                 binding.serviceTitleEt.text.toString().trim(),
                 binding.serviceDetailsEt.text.toString().trim(),
-                binding.serviceDurationEt.text.toString().trim(),
+                binding.servicePriceEt.text.toString().trim().toDouble(),
                 binding.servicePapersEt.text.toString().trim(),
                 lastDate,
                 binding.serviceTimeEt.text.toString().trim(),
@@ -150,7 +150,7 @@ class CreateNewServiceScreen : Fragment() {
     private fun createNewService(
         title: String,
         details: String,
-        duration: String,
+        price: Double,
         papers: String,
         date: String,
         time: String,
@@ -159,7 +159,7 @@ class CreateNewServiceScreen : Fragment() {
         val id = databaseReference.child("services").push().key
         databaseReference.child("services").child(id!!).setValue(
             ServiceData(
-                id, userPhone, title, details, duration, papers, date, time
+                id, userPhone, title, details, price, papers, date, time
             )
         ).addOnCompleteListener { task ->
             ProgressLoading.dismiss()
@@ -167,7 +167,7 @@ class CreateNewServiceScreen : Fragment() {
                 databaseReference.child("myServices").child(userPhone)
                     .child(id).setValue(
                         ServiceData(
-                            id, userPhone, title, details, duration, papers, date, time
+                            id, userPhone, title, details, price, papers, date, time
                         )
                     )
                 clearData()
@@ -184,7 +184,7 @@ class CreateNewServiceScreen : Fragment() {
 
         binding.serviceTimeEt.text?.clear()
         binding.serviceDateEt.text?.clear()
-        binding.serviceDurationEt.text?.clear()
+        binding.servicePriceEt.text?.clear()
         binding.serviceTitleEt.text?.clear()
         binding.serviceDetailsEt.text?.clear()
         binding.servicePapersEt.text?.clear()
@@ -206,7 +206,7 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }
@@ -226,7 +226,7 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }
@@ -246,7 +246,7 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }
@@ -266,14 +266,14 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }
 
         })
 
-        binding.serviceDurationEt.addTextChangedListener(object : TextWatcher {
+        binding.servicePriceEt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
             }
 
@@ -286,7 +286,7 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }
@@ -306,7 +306,7 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.serviceDurationEt.text.toString().isNotEmpty() &&
+                            binding.servicePriceEt.text.toString().isNotEmpty() &&
                             binding.servicePapersEt.text.toString().isNotEmpty()
 
             }

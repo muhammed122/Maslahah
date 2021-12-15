@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.maslahah.R
 import com.example.maslahah.utils.MyPreference
+import com.example.maslahah.utils.ProgressLoading
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -20,6 +21,7 @@ class HomeActivityScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_screen)
+        ProgressLoading.init(this)
         MyPreference.setPrefBoolean("login", true)
         databaseReference = FirebaseDatabase.getInstance().reference
         getDeviceToken()

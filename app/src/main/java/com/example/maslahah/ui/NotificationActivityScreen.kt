@@ -45,7 +45,7 @@ class NotificationActivityScreen : AppCompatActivity() {
 
 
     private fun getAllNotifications() {
-        ProgressLoading.show(this)
+        ProgressLoading.show()
         val phone = MyPreference.getPrefString("userPhone")
         databaseReference.child("notification").child(phone)
             .addChildEventListener(object : ChildEventListener {

@@ -135,7 +135,7 @@ class VerifyFragment : Fragment() {
 
 
     private fun verifyPhoneNumberWithCode(verificationId: String?, code: String) {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
         signInWithPhoneAuthCredential(credential)
 

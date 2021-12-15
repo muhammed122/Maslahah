@@ -64,7 +64,7 @@ class PhoneLoginFragment : Fragment() {
     }
 
     private fun checkPhoneNotHaveAccount(phone: String) {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         databaseReference.child("users")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

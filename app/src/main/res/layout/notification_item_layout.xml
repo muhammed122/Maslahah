@@ -21,7 +21,7 @@
             android:id="@+id/arrow_ic"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
-            android:src="@drawable/ic_deal_icon_large"
+            android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginEnd="@dimen/_10sdp"

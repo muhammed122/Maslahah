@@ -65,11 +65,32 @@
     <string name="reset_guid_message">حسنًا ، الأمر سهل فقط أرسل رقمك</string>
     <string name="new_password">كلمة مرور جديدة</string>
     <string name="new_password_guid_message2">لا بأس لكن تذكرها جيدًا هذه المرة</string>
-    <string name="confirm">يتأكد</string>
+    <string name="confirm">تاكيد</string>
     <string name="confirm_new_password">تأكيد كلمة المرور الجديدة</string>
     <string name="order_guide">لقد طلبت 8 مرات حتى الآن استمر في العمل نحن هنا لتوفير وقتك</string>
     <string name="balance_guide_first">رائع! لقد حصلت على</string>
-    <string name="balance_guide_second">جنيه استرليني حتى الآن ، فأنت نجم كبير ولكن لا تنسى دفع ضرائبك</string>
+    <string name="balance_guide_second">جنيه مصري حتى الآن ، فأنت نجم كبير ولكن لا تنسى دفع ضرائبك</string>
     <string name="tax_guide">رائع! لقد ربحت 2438 جنيه حتى الآن أنت نجم سوبر لكن لا تنسى أن تدفع ضريبتك يجب أن تدفع مقابل هذه الخدمة 539 جنيه.</string>
-    <string name="task_guide">رائعة! لقد أنجزت هذا العدد من المهام حتى الآن استمر</string>
+    <string name="task_guide">رائع! لقد أنجزت هذا العدد من المهام حتى الآن استمر</string>
+    <string name="add_phone_message">من فضللك ادخل رقم الهاتف لاتمام عملية التسجيل</string>
+    <string name="communication_info">بيانات التواصل</string>
+    <string name="continue_with_google">متابعة بحساب جوجل</string>
+    <string name="price_of_service">سعر الخدمة</string>
+    <string name="price_eaxmple" >على سبيل المثال:٥٠ جنيه </string>
+    <string name="edit_service">تعديل بيانات الخدمة</string>
+    <string name="edit">تعديل</string>
+    <string name="successfully_updated">تم التعديل بنجاح</string>
+    <string name="cancel">الغاء</string>
+    <string name="cancel_message">تحذير!! الغاء هذه الخدمة سيعرضك لغرامة ١٠ جنيهات  </string>
+    <string name="done_message">هل انتهيت من هذه الخدمة؟</string>
+    <string name="terms_polices">الشروط و الاحكام</string>
+    <string name="terms_agree">يجب الموافقة على الشروط و الاحكام</string>
+    <string name="terms_content">1- يجب إدخال الهاتف الصحيح  \n
+         2- إذا كان لديك أكثر من 200 جنيه كضريبة ، فسيتم تعليق حسابك  \n
+     3- يجب إرسال الأموال باستخدام خدمة فودافون كاش  \n
+     4- إرسال الأموال إلى هذا الرقم 010888888888</string>
+    <string name="suspended_message">تم ايقاف الحساب لحين سداد الضريبة المستحقة </string>
+
+
+
 </resources>

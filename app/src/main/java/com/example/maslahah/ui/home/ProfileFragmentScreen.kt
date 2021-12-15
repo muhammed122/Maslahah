@@ -18,7 +18,9 @@ import com.example.maslahah.databinding.FragmentMainHomeScreenBinding
 import com.example.maslahah.databinding.FragmentProfileScreenBinding
 import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 
 class ProfileFragmentScreen : Fragment() {
@@ -31,10 +33,15 @@ class ProfileFragmentScreen : Fragment() {
 
     var userdata: UserData? = null
 
+
+    lateinit var auth: FirebaseAuth
+
     lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         databaseReference = FirebaseDatabase.getInstance().reference
+
+        auth = FirebaseAuth.getInstance()
 
 
     }
@@ -66,6 +73,9 @@ class ProfileFragmentScreen : Fragment() {
                 MyPreference.setPrefBoolean("login", false)
                 startActivity(Intent(requireContext(), MainActivity::class.java))
                 activity?.finish()
+                auth.signOut()
+
+
             }
 
         }
@@ -84,7 +94,7 @@ class ProfileFragmentScreen : Fragment() {
         binding.yourTax.setOnClickListener {
             navController.navigate(
                 ProfileFragmentScreenDirections.actionProfileFragmentScreenToTaxScreenFragment(
-                    userdata?.tax!!.toFloat() , userdata?.balance!!.toFloat()
+                    userdata?.tax!!.toFloat(), userdata?.balance!!.toFloat()
                 )
             )
         }
@@ -107,9 +117,22 @@ class ProfileFragmentScreen : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+
+        Log.d("dddd", "onResume: imaaaaaaage")
+        val image = MyPreference.getPrefString("userImage")
+            if (image == "")
+                binding.userProfileImage.setImageResource(R.drawable.ic_avatar)
+            else
+                Glide.with(requireContext()).load(image)
+                    .into(binding.userProfileImage)
+    }
+
 
     private fun getUserData() {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         val phone = MyPreference.getPrefString("userPhone")
         databaseReference.child("users").child(phone)
             .addValueEventListener(object : ValueEventListener {
@@ -131,13 +154,15 @@ class ProfileFragmentScreen : Fragment() {
 
     private fun showData() {
         if (userdata != null) {
-            Glide.with(requireContext()).load(userdata?.image).into(binding.userProfileImage)
+
             binding.profileTasksValue.text = userdata?.tasks.toString()
             binding.profileBalanceValue.text = userdata?.balance.toString() + " LE"
             binding.profileTaxValue.text = userdata?.tax.toString() + " LE"
             binding.profileName.text = userdata?.name.toString()
             binding.profilePhoneDetails.text = userdata?.phone
             binding.profileEmailValue.text = userdata?.email
+
+
         }
     }
 

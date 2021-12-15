@@ -18,15 +18,24 @@ import com.example.maslahah.BaseFragment
 import com.example.maslahah.R
 import com.example.maslahah.data.UserData
 import com.example.maslahah.databinding.FragmentCreateAccountBinding
+import com.example.maslahah.ui.home.HomeActivityScreen
+import com.example.maslahah.utils.Const
 import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import java.util.concurrent.TimeUnit
+import org.json.JSONException
 
 
 class CreateAccountFragment : BaseFragment() {
@@ -49,24 +58,54 @@ class CreateAccountFragment : BaseFragment() {
     private lateinit var databaseReference: DatabaseReference
 
 
-    private fun uploadImageToServer() {
-        val storage = storageReference.child("images")
-            .child("${System.currentTimeMillis()}image")
-        storage.putFile(imageUri!!)
-            .addOnSuccessListener { task ->
-                storage.downloadUrl.addOnSuccessListener { uri ->
-                    imageUrl = uri.toString()
-                    createUserWithEmailAndPassword(
-                        binding.emailCreateAcc.text.toString().trim(),
-                        binding.passwordCreateAcc.text.toString().trim()
-                    )
+    lateinit var googleSignInClient: GoogleSignInClient
 
+
+    private fun initGoogleClientSignIn() {
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+    }
+
+
+    private val RC_SIGN_IN = 111
+    private fun signInWithGoogle() {
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun uploadImageToServer() {
+
+        if (imageUri != null) {
+            val storage = storageReference.child("images")
+                .child("${System.currentTimeMillis()}image")
+            storage.putFile(imageUri!!)
+                .addOnSuccessListener { task ->
+                    storage.downloadUrl.addOnSuccessListener { uri ->
+                        imageUrl = uri.toString()
+                        createUserWithEmailAndPassword(
+                            binding.emailCreateAcc.text.toString().trim(),
+                            binding.passwordCreateAcc.text.toString().trim()
+                        )
+
+                    }
+                }.addOnFailureListener { e ->
+                    ProgressLoading.dismiss()
+                    Toast.makeText(requireContext(), "${e.localizedMessage}", Toast.LENGTH_SHORT)
+                        .show()
+                    imageUrl = ""
                 }
-            }.addOnFailureListener { e ->
-                ProgressLoading.dismiss()
-                Toast.makeText(requireContext(), "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                imageUrl = ""
-            }
+        } else {
+
+            createUserWithEmailAndPassword(
+                binding.emailCreateAcc.text.toString().trim(),
+                binding.passwordCreateAcc.text.toString().trim()
+            )
+        }
     }
 
     private fun initFirebaseTools() {
@@ -78,6 +117,7 @@ class CreateAccountFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initFirebaseTools()
+        initGoogleClientSignIn()
     }
 
     override fun onCreateView(
@@ -89,27 +129,61 @@ class CreateAccountFragment : BaseFragment() {
     }
 
 
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                     auth.currentUser?.let {
+                        getUserDataWithEmail(it)
+                    }
+
+                } else {
+
+                    Log.w("ddddddd", "signInWithCredential:failure", task.exception)
+                    Toast.makeText(
+                        requireContext(), "Authentication failed. ${task.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (data?.data != null) {
-                imageUri = data.data
-                binding.cameraImage.visibility = View.GONE
-                binding.userImage.visibility = View.VISIBLE
-                binding.userImage.setImageURI(data.data)
-                binding.removeBtn.visibility = View.VISIBLE
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)!!
+                Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e)
+            }
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data)
+            if (resultCode == Activity.RESULT_OK) {
+                if (data?.data != null) {
+                    imageUri = data.data
+                    binding.cameraImage.visibility = View.GONE
+                    binding.userImage.visibility = View.VISIBLE
+                    binding.userImage.setImageURI(data.data)
+                    binding.removeBtn.visibility = View.VISIBLE
 
-                binding.createAccBtn.isEnabled =
-                    binding.nameCreateAcc.text.toString().isNotEmpty() &&
-                            binding.passwordCreateAcc.text.toString().isNotEmpty() &&
-                            binding.emailCreateAcc.text.toString().isNotEmpty() &&
-                            binding.phoneCreateAcc.text.toString().length == 11
-                            && imageUri != null
-
+                    binding.createAccBtn.isEnabled =
+                        binding.nameCreateAcc.text.toString().isNotEmpty() &&
+                                binding.passwordCreateAcc.text.toString().isNotEmpty() &&
+                                binding.emailCreateAcc.text.toString().isNotEmpty() &&
+                                binding.phoneCreateAcc.text.toString().length == 11
+                                && imageUri != null
+                }
 
             }
-
         }
+
     }
 
     lateinit var navController: NavController
@@ -134,12 +208,28 @@ class CreateAccountFragment : BaseFragment() {
             )
         }
 
+
+
+        binding.googleLoginButton.setOnClickListener {
+            signInWithGoogle()
+        }
+
+//        binding.fbLoginButton.setOnClickListener {
+//
+//            val intent = Intent(requireActivity(), FacebookAuthActivity::class.java)
+//            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+//            startActivity(intent)
+//            activity?.finish()
+//
+//
+//        }
+
         binding.removeBtn.setOnClickListener {
             imageUri = null
             imageUrl = ""
             binding.userImage.setImageResource(0)
-            binding.userImage.visibility=View.GONE
-            binding.cameraImage.visibility=View.VISIBLE
+            binding.userImage.visibility = View.GONE
+            binding.cameraImage.visibility = View.VISIBLE
             binding.removeBtn.visibility = View.GONE
             binding.createAccBtn.isEnabled = false
 
@@ -155,14 +245,31 @@ class CreateAccountFragment : BaseFragment() {
                     Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
-            }else {
-                checkPhoneNotHaveAccount(binding.phoneCreateAcc.text.toString())
+            } else {
+                if (!binding.termsCheck.isChecked) {
+                    Toast.makeText(
+                        requireContext(),
+                        resources.getString(R.string.terms_agree),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else
+                    checkPhoneNotHaveAccount(binding.phoneCreateAcc.text.toString())
             }
-
-
-
-
         }
+
+
+        binding.termsText.setOnClickListener {
+
+            navController.navigateUp()
+            navController.navigate(
+                CreateAccountFragmentDirections.actionCreateAccountFragmentToTermsAndPolicyFragment()
+            )
+        }
+
+
+        faceBookInit()
+
+        //binding.fbLoginButton.performClick()
 
 
     }
@@ -174,7 +281,7 @@ class CreateAccountFragment : BaseFragment() {
                 if (task.isSuccessful)
                     uploadUserData(
                         binding.nameCreateAcc.text.toString().trim(),
-                        email, binding.phoneCreateAcc.text.toString().trim(), imageUrl,password
+                        email, binding.phoneCreateAcc.text.toString().trim(), imageUrl, password
                     )
                 else {
                     ProgressLoading.dismiss()
@@ -191,17 +298,21 @@ class CreateAccountFragment : BaseFragment() {
 
 
     private fun checkPhoneNotHaveAccount(phone: String) {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         databaseReference.child("users")
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.hasChild(phone)) {
                         ProgressLoading.dismiss()
-                        Toast.makeText(requireContext(), resources.getString(R.string.have_acc), Toast.LENGTH_SHORT).show()
-                    }
-                    else
+                        Toast.makeText(
+                            requireContext(),
+                            resources.getString(R.string.have_acc),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else
                         uploadImageToServer()
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     ProgressLoading.dismiss()
 
@@ -209,33 +320,42 @@ class CreateAccountFragment : BaseFragment() {
             })
 
 
-
     }
 
-    private fun uploadUserData(name: String, email: String, phone: String, image: String ,password: String) {
+    private fun uploadUserData(
+        name: String,
+        email: String,
+        phone: String,
+        image: String,
+        password: String
+    ) {
         databaseReference.child("users").child(phone)
-            .setValue(UserData(name, phone, image, email ,password)).addOnSuccessListener { task ->
-
-                //cash user data
-                MyPreference.saveUserData(UserData(name, phone, image, email))
-
-
+            .setValue(UserData(name, phone, image, email, password))
+            .addOnCompleteListener { task ->
                 ProgressLoading.dismiss()
+                if (task.isSuccessful) {
+                    //cash user data
+                    MyPreference.saveUserData(UserData(name, phone, image, email))
 
 
-                //navigate to verify phone
-                navController.navigateUp()
-                navController.navigate(
-                    CreateAccountFragmentDirections.actionCreateAccountFragmentToVerifyFragment(
-                        phone
+                    //navigate to verify phone
+                    navController.navigateUp()
+                    navController.navigate(
+                        CreateAccountFragmentDirections.actionCreateAccountFragmentToVerifyFragment(
+                            phone
+                        )
                     )
-                )
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "${task.exception?.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-            }.addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
-                ProgressLoading.dismiss()
+                }
+
+
             }
-
 
     }
 
@@ -254,7 +374,7 @@ class CreateAccountFragment : BaseFragment() {
                             binding.passwordCreateAcc.text.toString().isNotEmpty() &&
                             binding.emailCreateAcc.text.toString().isNotEmpty() &&
                             binding.phoneCreateAcc.text.toString().length == 11
-                            && imageUri != null
+
             }
 
         })
@@ -273,7 +393,7 @@ class CreateAccountFragment : BaseFragment() {
                                 binding.passwordCreateAcc.text.toString().isNotEmpty() &&
                                 binding.emailCreateAcc.text.toString().isNotEmpty() &&
                                 binding.phoneCreateAcc.text.toString().length == 11
-                                && imageUri != null
+
                 }
 
             })
@@ -293,7 +413,7 @@ class CreateAccountFragment : BaseFragment() {
                                 binding.passwordCreateAcc.text.toString().isNotEmpty() &&
                                 binding.emailCreateAcc.text.toString().isNotEmpty() &&
                                 binding.phoneCreateAcc.text.toString().length == 11
-                                && imageUri != null
+
                 }
 
             })
@@ -312,10 +432,135 @@ class CreateAccountFragment : BaseFragment() {
                                 binding.passwordCreateAcc.text.toString().isNotEmpty() &&
                                 binding.emailCreateAcc.text.toString().isNotEmpty() &&
                                 binding.phoneCreateAcc.text.toString().length == 11
-                                && imageUri != null
                 }
 
             })
+    }
+
+
+    lateinit var callbackManager: CallbackManager
+    lateinit var accessToken: AccessToken
+    private fun faceBookInit() {
+        callbackManager = CallbackManager.Factory.create()
+        binding.fbLoginButton.apply {
+            setPermissions(listOf("public_profile", "email"))
+            fragment = this@CreateAccountFragment
+
+            registerCallback(callbackManager, object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(loginResult: LoginResult?) {
+                    accessToken = loginResult!!.accessToken
+                    // App code
+                    val request =
+                        GraphRequest.newMeRequest(loginResult.accessToken) { `object`, response -> // Application code
+                            try {
+//                                val name = `object`.getString("name")
+//                                val email = `object`.getString("email")
+//                                val id = `object`.getString("id")
+//                                val image = `object`.getString("picture")
+//
+//                                Log.d(TAG, "onSuccess: $image")
+
+                                handleFacebookAccessToken(loginResult.accessToken)
+
+
+                            } catch (e: JSONException) {
+                                e.printStackTrace()
+                            }
+                        }
+
+                    val parameters = Bundle()
+                    parameters.putString("fields", "id,name,email,birthday,picture.type(large)")
+                    request.parameters = parameters
+                    request.executeAsync()
+                    LoginManager.getInstance().logOut()
+                }
+
+                override fun onCancel() {
+                    // App code
+                    Log.e("ddddddd", "onSuccess cancel: ")
+                }
+
+                override fun onError(exception: FacebookException) {
+                    // App code
+                    Log.e("dddddddddd", "onSuccess: ${exception.localizedMessage} ")
+                }
+            })
+        }
+    }
+
+
+    private fun handleFacebookAccessToken(token: AccessToken) {
+        val credential = FacebookAuthProvider.getCredential(token.token)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    val user = auth.currentUser
+                    //  updateUI(user)
+                    if (user != null)
+                        getUserDataWithEmail(user)
+
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("ddddddd", "signInWithCredential:failure", task.exception)
+                    Toast.makeText(
+                        requireContext(), "Authentication failed. ${task.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    //updateUI(null)
+                }
+            }
+    }
+
+    private fun getUserDataWithEmail(firebaseUser: FirebaseUser) {
+        databaseReference.child("users").orderByChild("email").equalTo(firebaseUser.email)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChildren()) {
+                        for (data in snapshot.children) {
+                            if (data.child("email")
+                                    .getValue(String::class.java) == firebaseUser.email
+                            ) {
+                                val user = data.getValue(UserData::class.java)
+                                MyPreference.saveUserData(user!!)
+
+                                ProgressLoading.dismiss()
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Successfully Login",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                startActivity(
+                                    Intent(
+                                        requireActivity(),
+                                        HomeActivityScreen::class.java
+                                    )
+                                )
+                                activity?.finish()
+                            }
+                        }
+                    } else {
+                        navController.navigateUp()
+                        navController.navigate(
+                            CreateAccountFragmentDirections.actionCreateAccountFragmentToAddPhoneScreen(
+                                firebaseUser.email.toString(),
+                                firebaseUser.displayName.toString(),
+                                firebaseUser.photoUrl.toString()
+                            )
+                        )
+
+                    }
+
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+
+                    Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
     }
 
 

@@ -8,18 +8,40 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="addPhoneScreen">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-3061" />
+                            <option name="y" value="-449" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="createAccountFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2785" />
-                            <option name="y" value="126" />
+                            <option name="x" value="-3790" />
+                            <option name="y" value="22" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_createAccountFragment_to_addPhoneScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_createAccountFragment_to_emailLoginScreen">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_createAccountFragment_to_termsAndPolicyFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -39,8 +61,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2476" />
-                            <option name="y" value="16" />
+                            <option name="x" value="-3068" />
+                            <option name="y" value="-8" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -70,8 +92,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2102" />
-                            <option name="y" value="22" />
+                            <option name="x" value="-2568" />
+                            <option name="y" value="-2" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -91,8 +113,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2547" />
-                            <option name="y" value="411" />
+                            <option name="x" value="-3085" />
+                            <option name="y" value="515" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -117,8 +139,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1834" />
-                            <option name="y" value="-223" />
+                            <option name="x" value="-2351" />
+                            <option name="y" value="-418" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -133,13 +155,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="termsAndPolicyFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-3439" />
+                            <option name="y" value="-430" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="verifyFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-2152" />
-                            <option name="y" value="377" />
+                            <option name="x" value="-2555" />
+                            <option name="y" value="414" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -193,8 +227,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-5172" />
-                            <option name="y" value="-562" />
+                            <option name="x" value="-4961" />
+                            <option name="y" value="-611" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -222,6 +256,11 @@
                               </value>
                             </entry>
                             <entry key="action_profileFragmentScreen_to_tasksScreenFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_profileFragmentScreen_to_taxScreenFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

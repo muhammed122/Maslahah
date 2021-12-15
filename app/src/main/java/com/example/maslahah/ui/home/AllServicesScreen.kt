@@ -40,7 +40,10 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
 
 
     private var detailsServiceView: ConstraintLayout? = null
-    private var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
+    companion object{
+      var detailsServiceSheet = BottomSheetBehavior<ConstraintLayout>()
+    }
+
 
 
     private var addServiceView: ConstraintLayout? = null
@@ -106,7 +109,7 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
     }
 
     private fun getServicesData() {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         listener = databaseReference.child("services").orderByChild("selected").equalTo(false)
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
@@ -120,10 +123,12 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
 
+                   serviceAdapter.updateService(snapshot.getValue(ServiceData::class.java)!!)
+
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
-
+                    serviceAdapter.removeService(snapshot.getValue(ServiceData::class.java)!!)
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
@@ -141,7 +146,7 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
     override fun serviceClickListener(serviceData: ServiceData) {
         Const.serviceId = serviceData.id!!
         val v = activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.details_service_fragment, ServiceDetailsScreen())?.commit()
+            ?.replace(R.id.details_service_fragment, ServiceDetailsScreen())?.commitNowAllowingStateLoss()
 
         detailsServiceSheet.state = BottomSheetBehavior.STATE_EXPANDED
 

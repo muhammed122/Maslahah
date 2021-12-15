@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.auth.AddPhoneScreen">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/g1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/n1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/g1">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/welcome_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cairo_bold"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:text="@string/communication_info"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/_16ssp" />
+
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/create_acc_message"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:text="@string/add_phone_message"
+        android:textColor="@color/body_color"
+        android:textSize="@dimen/_12ssp"
+        android:minLines="2"
+        app:layout_constraintWidth_percent="0.5"
+        app:fontFamily="@font/cairo_regular"
+        android:gravity="center"
+        app:lineHeight="@dimen/_18sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/n1" />
+
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/phone_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/create_acc_message"
+        android:hint="@string/phone"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:inputType="phone"
+        android:maxLength="11"
+        android:textAlignment="viewStart"
+        android:background="@drawable/edit_text_shape"
+        android:padding="@dimen/_8sdp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/create_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/phone_create"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@drawable/button_shape"
+        android:textColor="@color/white"
+        android:text="@string/create_account"
+        android:enabled="false"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_14ssp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

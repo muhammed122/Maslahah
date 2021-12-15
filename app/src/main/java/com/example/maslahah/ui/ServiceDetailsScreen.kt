@@ -59,12 +59,11 @@ class ServiceDetailsScreen : Fragment() {
         _binding = FragmentServiceDetailsScreenBinding.bind(view)
 
 
-        Log.d("ddddd", "onViewCreated: id ${Const.serviceId} ")
+
 
         binding.acceptServiceBtn.setOnClickListener {
             addServiceToUser()
         }
-
 
 
     }
@@ -77,12 +76,12 @@ class ServiceDetailsScreen : Fragment() {
     }
 
     private fun getServiceDetails() {
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         databaseReference.child("services").child(Const.serviceId)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     service = snapshot.getValue(ServiceData::class.java)
-                    if (service!=null) {
+                    if (service != null) {
                         showServiceDetails(service!!)
                     }
                 }
@@ -99,8 +98,7 @@ class ServiceDetailsScreen : Fragment() {
 
         getServiceOwnerData(service.serviceOwnerPhone)
         binding.serviceDateTimeTxt.text = "${service.date}, ${service.time}"
-        binding.serviceDurationValueTxt.text =
-            "${service.duration} : ${service.duration?.toInt()?.plus(1)} Hours"
+        binding.servicePriceValueTxt.text = "${service.price} LE"
         binding.serviceTitleTxtValue.text = service.title
         binding.serviceDetailsTxtValue.text = service.details
         binding.servicePaperTxtValue.text = service.papers
@@ -114,8 +112,8 @@ class ServiceDetailsScreen : Fragment() {
                     val user = snapshot.getValue(UserData::class.java)
                     Log.d("dddddd", "onDataChange: user $user")
 
-                    if (user!=null)
-                    showServiceUserData(user)
+                    if (user != null)
+                        showServiceUserData(user)
 
                 }
 
@@ -129,7 +127,10 @@ class ServiceDetailsScreen : Fragment() {
     private fun showServiceUserData(user: UserData) {
         userServicePhone = user.phone!!
         binding.userServiceNameTxt.text = user.name
-        Glide.with(requireContext()).load(user.image).into(binding.userImage)
+        if (user.image == "")
+            binding.userImage.setImageResource(R.drawable.ic_avatar)
+        else
+            Glide.with(requireActivity()).load(user.image).into(binding.userImage)
         ProgressLoading.dismiss()
 
         binding.callBtn.setOnClickListener {

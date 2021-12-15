@@ -16,14 +16,39 @@ class ServiceAdapter(private val serviceItemClickListener: ServiceItemClickListe
 
 
     fun setOneService(serviceData: ServiceData) {
-        list.add(serviceData)
-        notifyDataSetChanged()
+        list.add(0,serviceData)
+        notifyItemInserted(0)
 
     }
 
     fun setServices(list: ArrayList<ServiceData>) {
         this.list = list
         notifyDataSetChanged()
+
+    }
+
+
+    fun updateService(service: ServiceData) {
+        list.remove(
+            list.find {
+                it.id == service.id
+            }
+        ).also {
+            if (it) {
+                list.add(service)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
+    fun removeService(service: ServiceData) {
+        list.remove(
+            list.find {
+                it.id == service.id
+            }
+        ).also {
+            notifyDataSetChanged()
+        }
 
     }
 
@@ -39,7 +64,7 @@ class ServiceAdapter(private val serviceItemClickListener: ServiceItemClickListe
         val data = list?.get(position)
         if (data != null) {
             holder.date.text = "${data.date}, ${data.time}"
-            holder.duration.text = "${data.duration} : ${data.duration?.toInt()?.plus(1)}"
+            holder.price.text = "${data.price}  LE"
             holder.title.text = data.title
         }
 
@@ -64,7 +89,7 @@ class ServiceAdapter(private val serviceItemClickListener: ServiceItemClickListe
 
         var date: AppCompatTextView = view.findViewById(R.id.service_time)
         var title: AppCompatTextView = view.findViewById(R.id.service_desc)
-        var duration: AppCompatTextView = view.findViewById(R.id.expacted_time)
+        var price: AppCompatTextView = view.findViewById(R.id.price)
 
 
     }

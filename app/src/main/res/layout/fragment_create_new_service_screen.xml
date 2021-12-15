@@ -64,31 +64,6 @@
             android:padding="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/service_title_txt" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/service_desc_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/sf_ui_display_semibold"
-            android:text="@string/more_details"
-            android:textColor="@color/body_color"
-            android:textSize="@dimen/_12ssp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service_title_et" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/service_details_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:background="@drawable/edit_text_shape"
-            android:hint="@string/details_eaxmple"
-            android:inputType="text"
-            android:textAlignment="viewStart"
-            android:padding="@dimen/_8sdp"
-            app:layout_constraintTop_toBottomOf="@+id/service_desc_txt" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/service_appointment_txt"
@@ -101,7 +76,7 @@
             android:textColor="@color/body_color"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service_details_et" />
+            app:layout_constraintTop_toBottomOf="@+id/service_title_et" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/service_date_et"
@@ -135,31 +110,31 @@
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/service_duration_txt"
+            android:id="@+id/service_price_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/sf_ui_display_semibold"
-            android:text="@string/expected_duration"
+            android:text="@string/price_of_service"
             android:textColor="@color/body_color"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/service_time_et" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/service_duration_et"
+            android:id="@+id/service_price_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/edit_text_shape"
-            android:hint="@string/duration_eaxmple"
+            android:hint="@string/price_eaxmple"
             android:inputType="number"
             android:textAlignment="viewStart"
             android:maxLength="2"
             android:padding="@dimen/_8sdp"
-            app:layout_constraintTop_toBottomOf="@+id/service_duration_txt" />
+            app:layout_constraintTop_toBottomOf="@+id/service_price_txt" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/service_paper_txt"
@@ -172,7 +147,7 @@
             android:textColor="@color/body_color"
             android:textSize="@dimen/_12ssp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service_duration_et" />
+            app:layout_constraintTop_toBottomOf="@+id/service_price_et" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/service_papers_et"
@@ -187,8 +162,35 @@
             android:padding="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@+id/service_paper_txt" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/service_desc_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/sf_ui_display_semibold"
+                android:text="@string/more_details"
+                android:textColor="@color/body_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_papers_et" />
 
-        <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/service_details_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@drawable/edit_text_shape"
+                android:hint="@string/details_eaxmple"
+                android:inputType="text"
+                android:textAlignment="viewStart"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:paddingVertical="@dimen/_14sdp"
+                app:layout_constraintTop_toBottomOf="@+id/service_desc_txt" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/create_service_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -202,7 +204,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/service_papers_et" />
+            app:layout_constraintTop_toBottomOf="@+id/service_details_et" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

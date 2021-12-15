@@ -67,7 +67,7 @@ class EmailLoginScreen : Fragment() {
         enableConfirmButton()
 
         binding.loginBtn.setOnClickListener {
-            ProgressLoading.show(requireActivity())
+            ProgressLoading.show()
             signInWithEmailAndPassword(
                 binding.emailLogin.text.toString().trim(),
                 binding.passwordLogin.text.toString().trim()

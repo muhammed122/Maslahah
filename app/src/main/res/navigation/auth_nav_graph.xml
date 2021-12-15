@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_createAccountFragment_to_emailLoginScreen"
             app:destination="@id/emailLoginScreen" />
+        <action
+            android:id="@+id/action_createAccountFragment_to_addPhoneScreen"
+            app:destination="@id/addPhoneScreen" />
+        <action
+            android:id="@+id/action_createAccountFragment_to_termsAndPolicyFragment"
+            app:destination="@id/termsAndPolicyFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailLoginScreen"
@@ -85,4 +91,23 @@
             app:popUpTo="@+id/auth_nav_graph"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/addPhoneScreen"
+        android:name="com.example.maslahah.ui.auth.AddPhoneScreen"
+        android:label="fragment_add_phone_screen"
+        tools:layout="@layout/fragment_add_phone_screen" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/termsAndPolicyFragment"
+        android:name="com.example.maslahah.ui.home.TermsAndPolicyFragment"
+        android:label="fragment_terms_and_policy"
+        tools:layout="@layout/fragment_terms_and_policy" />
 </navigation>

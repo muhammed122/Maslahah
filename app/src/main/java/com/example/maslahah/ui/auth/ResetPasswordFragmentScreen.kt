@@ -77,7 +77,7 @@ class ResetPasswordFragmentScreen : Fragment() {
             return
         }
 
-        ProgressLoading.show(requireActivity())
+        ProgressLoading.show()
         val credential = EmailAuthProvider.getCredential(email, passsword)
         val user = auth.currentUser
         user?.reauthenticate(credential)?.addOnCompleteListener { task ->

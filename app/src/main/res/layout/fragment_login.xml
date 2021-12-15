@@ -67,6 +67,7 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:inputType="phone"
         android:maxLength="11"
+        android:textAlignment="viewStart"
         android:background="@drawable/edit_text_shape"
         android:padding="@dimen/_8sdp"/>
 
