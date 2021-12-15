@@ -38,7 +38,7 @@ class EmailLoginScreen : Fragment() {
     private lateinit var databaseReference: DatabaseReference
 
 
-    lateinit var navController: NavController
+
 
     private fun initFirebaseTools() {
         storageReference = FirebaseStorage.getInstance().reference
@@ -63,7 +63,7 @@ class EmailLoginScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentEmailLoginScreenBinding.bind(view)
-        navController = Navigation.findNavController(requireView())
+
         enableConfirmButton()
 
         binding.loginBtn.setOnClickListener {
@@ -76,20 +76,18 @@ class EmailLoginScreen : Fragment() {
 
         binding.loginPhoneBtn.setOnClickListener {
             //navController.navigateUp()
-            navController.navigate(
+            findNavController().navigate(
                 EmailLoginScreenDirections.actionEmailLoginScreenToLoginFragment()
             )
         }
 
         binding.goSignup.setOnClickListener {
            // navController.navigateUp()
-            navController.navigate(
-                EmailLoginScreenDirections.actionEmailLoginScreenToCreateAccountFragment()
-            )
+            findNavController().popBackStack()
         }
 
         binding.forgetPassword.setOnClickListener {
-            navController.navigate(
+            findNavController().navigate(
                 EmailLoginScreenDirections.actionEmailLoginScreenToGetPasswordByEmailScreen()
             )
         }

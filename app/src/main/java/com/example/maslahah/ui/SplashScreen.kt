@@ -12,11 +12,12 @@ import android.view.Window
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.constraintlayout.motion.widget.TransitionAdapter
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.example.maslahah.MainActivity
 import com.example.maslahah.R
 import kotlin.math.log
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : LocalizationActivity() {
 
 
     lateinit var logo: AppCompatImageView

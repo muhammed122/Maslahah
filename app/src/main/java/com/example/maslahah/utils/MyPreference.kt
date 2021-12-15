@@ -85,6 +85,15 @@ object MyPreference {
         getSharedPreferences()?.edit()?.putInt(key, value)?.apply()
     }
 
+    fun setLanguage(value: String) {
+        getSharedPreferences()?.edit()?.putString("lang", value)?.apply()
+    }
+
+    fun getLanguage(): String {
+        return getSharedPreferences()?.getString("lang", "ar")!!
+
+    }
+
     fun setPrefBoolean(key: String, value: Boolean) {
         getSharedPreferences()?.edit()?.putBoolean(key, value)?.apply()
     }

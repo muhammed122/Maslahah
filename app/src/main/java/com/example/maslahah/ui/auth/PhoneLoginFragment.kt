@@ -50,15 +50,24 @@ class PhoneLoginFragment : Fragment() {
         _binding = FragmentLoginBinding.bind(view)
         navController = Navigation.findNavController(requireView())
 
-        binding.goSignup.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_createAccountFragment)
+        binding.apply {
+            goSignup.setOnClickListener {
+                findNavController().navigate(PhoneLoginFragmentDirections.actionLoginFragmentToCreateAccountFragment())
+            }
+            loginEmailBtn.setOnClickListener {
+
+                findNavController().navigate(PhoneLoginFragmentDirections
+                    .actionLoginFragmentToEmailLoginScreen())
+
+            }
+            loginBtn.setOnClickListener {
+                checkPhoneNotHaveAccount(binding.phoneLogin.text.toString())
+            }
         }
 
         enableConfirmButton()
 
-        binding.loginBtn.setOnClickListener {
-            checkPhoneNotHaveAccount(binding.phoneLogin.text.toString())
-        }
+
 
 
     }

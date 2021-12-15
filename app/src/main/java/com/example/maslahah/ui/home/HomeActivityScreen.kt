@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.example.maslahah.R
 import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
@@ -14,7 +15,7 @@ import com.google.firebase.iid.FirebaseInstanceIdReceiver
 import com.google.firebase.messaging.FirebaseMessaging
 
 
-class HomeActivityScreen : AppCompatActivity() {
+class HomeActivityScreen : LocalizationActivity(){
 
     lateinit var databaseReference: DatabaseReference
 

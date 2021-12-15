@@ -589,7 +589,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
                         android:textColor="@color/main_color"
-                        tools:text="English"/>
+                       />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/arrow"

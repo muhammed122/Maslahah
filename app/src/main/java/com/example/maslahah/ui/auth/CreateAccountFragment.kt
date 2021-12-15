@@ -186,12 +186,12 @@ class CreateAccountFragment : BaseFragment() {
 
     }
 
-    lateinit var navController: NavController
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentCreateAccountBinding.bind(view)
 
-        navController = Navigation.findNavController(requireView())
+
         enableConfirmButton()
 
 
@@ -202,8 +202,8 @@ class CreateAccountFragment : BaseFragment() {
         }
 
         binding.goLogin.setOnClickListener {
-            navController.navigateUp()
-            navController.navigate(
+
+            findNavController().navigate(
                 CreateAccountFragmentDirections.actionCreateAccountFragmentToEmailLoginScreen()
             )
         }
@@ -260,8 +260,8 @@ class CreateAccountFragment : BaseFragment() {
 
         binding.termsText.setOnClickListener {
 
-            navController.navigateUp()
-            navController.navigate(
+
+            findNavController().navigate(
                 CreateAccountFragmentDirections.actionCreateAccountFragmentToTermsAndPolicyFragment()
             )
         }
@@ -339,8 +339,8 @@ class CreateAccountFragment : BaseFragment() {
 
 
                     //navigate to verify phone
-                    navController.navigateUp()
-                    navController.navigate(
+
+                    findNavController().navigate(
                         CreateAccountFragmentDirections.actionCreateAccountFragmentToVerifyFragment(
                             phone
                         )
@@ -540,8 +540,8 @@ class CreateAccountFragment : BaseFragment() {
                             }
                         }
                     } else {
-                        navController.navigateUp()
-                        navController.navigate(
+
+                        findNavController().navigate(
                             CreateAccountFragmentDirections.actionCreateAccountFragmentToAddPhoneScreen(
                                 firebaseUser.email.toString(),
                                 firebaseUser.displayName.toString(),

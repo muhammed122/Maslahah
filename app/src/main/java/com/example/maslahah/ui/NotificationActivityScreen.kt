@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.example.maslahah.R
 import com.example.maslahah.ui.adapter.NotificationAdapter
 import com.example.maslahah.ui.adapter.ServiceAdapter
@@ -14,7 +15,7 @@ import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
 import com.google.firebase.database.*
 
-class NotificationActivityScreen : AppCompatActivity() {
+class NotificationActivityScreen : LocalizationActivity() {
 
     lateinit var notificationAdapter: NotificationAdapter
     lateinit var mLayoutManager: RecyclerView.LayoutManager

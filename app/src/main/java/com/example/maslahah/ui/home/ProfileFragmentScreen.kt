@@ -60,6 +60,24 @@ class ProfileFragmentScreen : Fragment() {
         navController = Navigation.findNavController(requireView())
 
         getUserData()
+        if (MyPreference.getLanguage() == "ar") {
+            binding.profileLanguageValue.text = "English"
+        }else {
+            binding.profileLanguageValue.text = "العربيه"
+
+        }
+        binding.profileLanguageValue.setOnClickListener {
+
+            if (MyPreference.getLanguage() == "ar") {
+
+                changeLanguage("en")
+                binding.profileLanguageValue.text = "العربيه"
+            }else {
+
+                changeLanguage("ar")
+                binding.profileLanguageValue.text = "English"
+            }
+        }
 
         binding.logout.setOnClickListener {
             if (!userdata?.available!!)
@@ -117,17 +135,23 @@ class ProfileFragmentScreen : Fragment() {
 
     }
 
+    private fun changeLanguage(language: String) {
+        MyPreference.setLanguage(language.toLowerCase())
+        val activity = requireActivity() as HomeActivityScreen
+        activity.setLanguage(language)
+    }
+
     override fun onResume() {
         super.onResume()
 
 
         Log.d("dddd", "onResume: imaaaaaaage")
         val image = MyPreference.getPrefString("userImage")
-            if (image == "")
-                binding.userProfileImage.setImageResource(R.drawable.ic_avatar)
-            else
-                Glide.with(requireContext()).load(image)
-                    .into(binding.userProfileImage)
+        if (image == "")
+            binding.userProfileImage.setImageResource(R.drawable.ic_avatar)
+        else
+            Glide.with(requireContext()).load(image)
+                .into(binding.userProfileImage)
     }
 
 
