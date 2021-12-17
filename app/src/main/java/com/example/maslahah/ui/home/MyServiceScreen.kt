@@ -88,6 +88,10 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         _binding = FragmentMyServiceScreenBinding.bind(view)
 
 
+        if (MyPreference.getLanguage() == "ar") {
+            binding.myServicesScreen.rotationY = 180f
+        }
+
         initBottomSheet()
         initRecyclerView()
         getServicesData()
@@ -104,6 +108,8 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         _binding=null
 
     }
+
+
 
     private fun getServicesData() {
         ProgressLoading.show()

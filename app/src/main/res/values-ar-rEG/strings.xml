@@ -24,7 +24,7 @@
     <string name="siginup">انشاء حساب</string>
     <string name="external_storage_message">السماح باستخدام التخزين</string>
     <string name="create_service">انشاء خدمة جديدة</string>
-    <string name="service_title">العنوان</string>
+    <string name="service_title">اسم الخدمة</string>
     <string name="title_exmple">على سبيل المثال:استخراج اوراق من بنك</string>
     <string name="more_details">تفاصيل الخدمة</string>
     <string name="details_eaxmple">على سبيل المثال: الموقع في</string>
@@ -88,8 +88,10 @@
     <string name="terms_content">1- يجب إدخال الهاتف الصحيح  \n
          2- إذا كان لديك أكثر من 200 جنيه كضريبة ، فسيتم تعليق حسابك  \n
      3- يجب إرسال الأموال باستخدام خدمة فودافون كاش  \n
-     4- إرسال الأموال إلى هذا الرقم 010888888888</string>
+     4- إرسال الأموال إلى هذا الرقم 01000769800</string>
     <string name="suspended_message">تم ايقاف الحساب لحين سداد الضريبة المستحقة </string>
+
+    <string name="contact_us">للتواصل</string>
 
 
 

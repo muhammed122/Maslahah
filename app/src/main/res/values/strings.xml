@@ -96,9 +96,10 @@
     <string name="terms_content">1- you should insert correct phone \n
         2- if you have more than 200 LE as Tax \n your account will be suspended -\n
     3- you should send money using Vodafone cash service -\n
-    4- send money to this number 010888888888</string>
+    4- send money to this number 01000769800</string>
 
 
     <string name="suspended_message">Your account has been suspended until the tax due is paid </string>
+    <string name="contact_us">Contact Us</string>
 
 </resources>

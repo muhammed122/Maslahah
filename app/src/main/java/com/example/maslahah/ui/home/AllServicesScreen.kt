@@ -20,6 +20,7 @@ import com.example.maslahah.ui.ServiceDetailsScreen
 import com.example.maslahah.ui.adapter.ServiceAdapter
 import com.example.maslahah.ui.adapter.ServiceItemClickListener
 import com.example.maslahah.utils.Const
+import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.*
@@ -81,6 +82,10 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentAllServicesScreenBinding.bind(view)
+
+        if (MyPreference.getLanguage() == "ar") {
+            binding.servicesScreen.rotationY = 180f
+        }
 
         initBottomSheet()
         initRecyclerView()

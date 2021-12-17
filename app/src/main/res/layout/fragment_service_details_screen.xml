@@ -71,6 +71,7 @@
         android:paddingStart="@dimen/_5sdp"
         android:paddingTop="@dimen/_5sdp"
         android:text="@string/call"
+        android:visibility="gone"
         android:textColor="@color/accent_color"
         app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
         app:layout_constraintEnd_toEndOf="parent"

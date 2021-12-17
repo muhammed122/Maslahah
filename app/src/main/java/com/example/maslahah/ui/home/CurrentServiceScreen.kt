@@ -345,14 +345,12 @@ class CurrentServiceScreen : Fragment() {
 
                                 //add balance and tasks to user
                                 val balance = service.price?.plus(user.balance!!)
-                                val tax = 10.plus(user.tax!!)
+                                val tax = service.price?.times(0.10)
 
                                 databaseReference.child("users").child(phone)
                                     .child("tax").setValue(tax)
                                 databaseReference.child("users").child(phone)
                                     .child("balance").setValue(balance)
-
-
 
                                 databaseReference.child("users").child(phone).child("tasks")
                                     .setValue(
@@ -361,7 +359,7 @@ class CurrentServiceScreen : Fragment() {
 
                                 MyPreference.savePrefFloat("userBalance", balance?.toFloat()!!)
                                 MyPreference.setPrefInt("userTasks", user.tasks?.plus(1)!!)
-                                MyPreference.setPrefInt("userTax", tax.toInt())
+                                tax?.toInt()?.let { MyPreference.setPrefInt("userTax", it) }
 
 
                                 // remove from all services

@@ -11,6 +11,7 @@ import com.example.maslahah.databinding.FragmentMainHomeScreenBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.util.*
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
@@ -195,6 +196,16 @@ class MainHomeScreenFragment : Fragment() {
 
     }
 
+
+    override fun onResume() {
+        super.onResume()
+
+        val pref =MyPreference.getLanguage()
+        Log.d("dddd", "onResume:  $pref")
+        if (MyPreference.getLanguage() == "ar") {
+            binding.servicesPager.rotationY = 180f
+        }
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
 //        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");

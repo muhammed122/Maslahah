@@ -70,6 +70,11 @@ class PhoneLoginFragment : Fragment() {
 
 
 
+        binding.loginEmailBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_emailLoginScreen)
+        }
+
+
     }
 
     private fun checkPhoneNotHaveAccount(phone: String) {

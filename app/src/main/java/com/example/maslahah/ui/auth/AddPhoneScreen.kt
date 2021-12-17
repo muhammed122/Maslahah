@@ -19,8 +19,7 @@ import com.example.maslahah.utils.MyPreference
 import com.example.maslahah.utils.ProgressLoading
 import com.example.maslahah.utils.Utile
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 
 class AddPhoneScreen : Fragment() {
@@ -68,7 +67,7 @@ class AddPhoneScreen : Fragment() {
         _binding = FragmentAddPhoneScreenBinding.bind(view)
         enableConfirmButton()
         binding.createBtn.setOnClickListener {
-            uploadUserData(name, email, image, binding.phoneCreate.text.toString().trim())
+           checkPhoneNotHaveAccount(binding.phoneCreate.text.toString())
         }
 
 
@@ -95,6 +94,32 @@ class AddPhoneScreen : Fragment() {
 
 
             }
+
+    }
+
+
+    private fun checkPhoneNotHaveAccount(phone: String) {
+        ProgressLoading.show()
+        databaseReference.child("users")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.hasChild(phone)) {
+                        ProgressLoading.dismiss()
+                        Toast.makeText(
+                            requireContext(),
+                            resources.getString(R.string.have_acc),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else
+                        uploadUserData(name, email, image, binding.phoneCreate.text.toString().trim())
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    ProgressLoading.dismiss()
+
+                }
+            })
+
 
     }
 
