@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/carve_card_background"
+    android:backgroundTint="@color/main_color"
     android:paddingBottom="@dimen/_8sdp"
     tools:context=".ui.home.EditServiceScreenFragment">
 
@@ -24,7 +25,7 @@
                 android:fontFamily="@font/sf_ui_display_semibold"
                 android:padding="@dimen/_8sdp"
                 android:text="@string/edit_service"
-                android:textColor="@color/main_color"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +134,6 @@
                 android:hint="@string/price_eaxmple"
                 android:inputType="number"
                 android:textAlignment="viewStart"
-                android:maxLength="2"
                 android:padding="@dimen/_8sdp"
                 app:layout_constraintTop_toBottomOf="@+id/service_price_txt" />
 
