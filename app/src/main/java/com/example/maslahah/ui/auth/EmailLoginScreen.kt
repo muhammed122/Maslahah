@@ -10,9 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.example.maslahah.MainActivity
 import com.example.maslahah.R
 import com.example.maslahah.data.UserData
 import com.example.maslahah.databinding.FragmentCreateAccountBinding
@@ -65,6 +67,33 @@ class EmailLoginScreen : Fragment() {
         _binding = FragmentEmailLoginScreenBinding.bind(view)
 
         enableConfirmButton()
+
+        if (MyPreference.getLanguage() == "ar") {
+            binding.arbLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent_color))
+        }else {
+            binding.enLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent_color))
+        }
+
+        binding.arbLangTxt.setOnClickListener {
+
+            Log.d("dddddd", "onViewCreated:  tttttttt")
+            if (MyPreference.getLanguage() != "ar") {
+                changeLanguage("ar")
+                binding.arbLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent_color))
+                binding.enLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.body_color))
+            }
+        }
+
+
+        binding.enLangTxt.setOnClickListener {
+            Log.d("dddddd", "onViewCreated:  tttttttt")
+            if (MyPreference.getLanguage() != "en") {
+                changeLanguage("en")
+                binding.arbLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.body_color))
+                binding.enLangTxt.setTextColor(ContextCompat.getColor(requireContext(), R.color.accent_color))
+            }
+        }
+
 
         binding.loginBtn.setOnClickListener {
             ProgressLoading.show()
@@ -172,6 +201,13 @@ class EmailLoginScreen : Fragment() {
                         .isNotEmpty()
             }
         })
+    }
+
+
+    private fun changeLanguage(language: String) {
+        MyPreference.setLanguage(language.toLowerCase())
+        val activity = requireActivity() as MainActivity
+        activity.setLanguage(language)
     }
 
 }

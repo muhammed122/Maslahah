@@ -29,7 +29,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
 
-        Log.d("dddddddd", "onMessageReceived1:  $remoteMessage")
+        Log.d("dddddddd", "onMessageReceived11111111:  $remoteMessage")
 
         if (remoteMessage.data["title"] == null || remoteMessage.data["message"] == null)
             return

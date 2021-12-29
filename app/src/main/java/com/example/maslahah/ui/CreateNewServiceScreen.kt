@@ -138,7 +138,7 @@ class CreateNewServiceScreen : Fragment() {
                 binding.serviceTitleEt.text.toString().trim(),
                 binding.serviceDetailsEt.text.toString().trim(),
                 binding.servicePriceEt.text.toString().trim().toDouble(),
-                binding.servicePapersEt.text.toString().trim(),
+                "",
                 lastDate,
                 binding.serviceTimeEt.text.toString().trim(),
 
@@ -206,8 +206,8 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
+                            binding.servicePriceEt.text.toString().isNotEmpty()
+
 
             }
 
@@ -226,8 +226,8 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
+                            binding.servicePriceEt.text.toString().isNotEmpty()
+
 
             }
 
@@ -246,8 +246,8 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
+                            binding.servicePriceEt.text.toString().isNotEmpty()
+
 
             }
 
@@ -266,8 +266,8 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
+                            binding.servicePriceEt.text.toString().isNotEmpty()
+
 
             }
 
@@ -286,32 +286,14 @@ class CreateNewServiceScreen : Fragment() {
                             binding.serviceDetailsEt.text.toString().isNotEmpty() &&
                             binding.serviceDateEt.text.toString().isNotEmpty() &&
                             binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
+                            binding.servicePriceEt.text.toString().isNotEmpty()
+
 
             }
 
         })
 
-        binding.servicePapersEt.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-            }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                binding.createServiceBtn.isEnabled =
-                    binding.serviceTitleEt.text.toString().isNotEmpty() &&
-                            binding.serviceDetailsEt.text.toString().isNotEmpty() &&
-                            binding.serviceDateEt.text.toString().isNotEmpty() &&
-                            binding.serviceTimeEt.text.toString().isNotEmpty() &&
-                            binding.servicePriceEt.text.toString().isNotEmpty() &&
-                            binding.servicePapersEt.text.toString().isNotEmpty()
-
-            }
-
-        })
 
 
     }

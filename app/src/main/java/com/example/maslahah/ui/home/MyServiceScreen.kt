@@ -40,7 +40,7 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
     private lateinit var databaseReference: DatabaseReference
 
 
-    lateinit var listener: ValueEventListener
+    lateinit var listener: ChildEventListener
 
     private var detailsServiceView: ConstraintLayout? = null
 
@@ -54,8 +54,6 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         detailsServiceView = binding.detailsServiceLayout3.parentMyServiceDetailsLayout
         detailsServiceSheet = BottomSheetBehavior.from(detailsServiceView!!)
         detailsServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
-
-
 
 
     }
@@ -105,10 +103,9 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
             .equalTo(phone)
             .removeEventListener(listener)
 
-        _binding=null
+        _binding = null
 
     }
-
 
 
     private fun getServicesData() {
@@ -116,23 +113,30 @@ class MyServiceScreen : Fragment(), ServiceItemClickListener {
         val phone = MyPreference.getPrefString("userPhone")
         listener =
             databaseReference.child("services").orderByChild("serviceOwnerPhone").equalTo(phone)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        servicesList.clear()
-
-                        if (snapshot.hasChildren()) {
-                            binding.noLoadedTxt.visibility = View.GONE
-                            for (data in snapshot.children) {
-                                val service = data.getValue(ServiceData::class.java)!!
-                                servicesList.add(service)
-                            }
-
-                        } else {
-                                binding.noLoadedTxt.visibility = View.VISIBLE
-
-                        }
-                        serviceAdapter.setServices(servicesList)
+                .addChildEventListener(object : ChildEventListener {
+                    override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                         ProgressLoading.dismiss()
+                        if (snapshot.hasChildren()) {
+                            serviceAdapter.setOneService(snapshot.getValue(ServiceData::class.java)!!)
+                            binding.noLoadedTxt.visibility = View.GONE
+                        } else
+                            binding.noLoadedTxt.visibility = View.VISIBLE
+                    }
+
+                    override fun onChildChanged(
+                        snapshot: DataSnapshot,
+                        previousChildName: String?
+                    ) {
+                        serviceAdapter.updateService(snapshot.getValue(ServiceData::class.java)!!)
+
+                    }
+
+                    override fun onChildRemoved(snapshot: DataSnapshot) {
+                        serviceAdapter.removeService(snapshot.getValue(ServiceData::class.java)!!)
+
+                    }
+
+                    override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
 
                     }
 

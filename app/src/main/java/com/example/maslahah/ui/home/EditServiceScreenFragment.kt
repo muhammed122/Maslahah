@@ -2,6 +2,7 @@ package com.example.maslahah.ui.home
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.maslahah.R
 import com.example.maslahah.data.ServiceData
 import com.example.maslahah.databinding.FragmentEditServiceScreenBinding
@@ -127,18 +129,59 @@ class EditServiceScreenFragment : Fragment() {
 
 
 
-        binding.editServiceBtn.setOnClickListener {
+        binding.editBtn.setOnClickListener {
 
-            updateService(
-                binding.serviceTitleEt.text.toString().trim(),
-                binding.serviceDetailsEt.text.toString().trim(),
-                binding.servicePriceEt.text.toString().trim().toDouble(),
-                binding.servicePapersEt.text.toString().trim(),
-                lastDate,
-                binding.serviceTimeEt.text.toString().trim(),
-            )
+
+            if (service?.selected!!)
+                Toast.makeText(
+                    requireContext(),
+                    resources.getString(R.string.service_selected),
+                    Toast.LENGTH_SHORT
+                ).show()
+            else
+                updateService(
+                    binding.serviceTitleEt.text.toString().trim(),
+                    binding.serviceDetailsEt.text.toString().trim(),
+                    binding.servicePriceEt.text.toString().trim().toDouble(),
+                    binding.servicePapersEt.text.toString().trim(),
+                    lastDate,
+                    binding.serviceTimeEt.text.toString().trim(),
+                )
 
         }
+
+        binding.cancelBtn.setOnClickListener {
+
+            if (service?.selected!!) {
+
+                showConfirmDialog(resources.getString(R.string.cancel_service_owner))
+
+            } else {
+                databaseReference.child("services").child(service?.id!!)
+                    .setValue(null).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Toast.makeText(
+                                requireContext(), resources.getString(R.string.service_deleted),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            MyServiceScreen.detailsServiceSheet.state =
+                                BottomSheetBehavior.STATE_COLLAPSED
+                        }
+                        else {
+                            Toast.makeText(
+                                requireContext(),
+                                it.exception?.localizedMessage,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+
+                databaseReference.child("myService").child(service?.id!!)
+                    .setValue(null)
+            }
+        }
+
     }
 
     private fun getServiceDetails() {
@@ -149,7 +192,7 @@ class EditServiceScreenFragment : Fragment() {
                     service = snapshot.getValue(ServiceData::class.java)
                     if (service != null) {
                         showServiceDetails(service!!)
-                        lastDate=service?.date!!
+                        lastDate = service?.date!!
                         ProgressLoading.dismiss()
                     }
                 }
@@ -210,6 +253,35 @@ class EditServiceScreenFragment : Fragment() {
             }
         }
 
+
+    }
+
+    private fun showConfirmDialog(message: String) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        builder.setCancelable(true)
+        builder.setTitle("Current Service")
+        builder.setMessage(message)
+        builder.setPositiveButton(resources.getString(R.string.confirm),
+            DialogInterface.OnClickListener { dialog, which ->
+                dialog.dismiss()
+                databaseReference.child("myService").child(service?.id!!)
+                    .setValue(null)
+                databaseReference.child("services").child(service?.id!!)
+                    .child("status").setValue(6)
+
+
+                val tax = MyPreference.getUserData().tax?.plus(10)
+                databaseReference.child("users").child(MyPreference.getUserData().phone!!)
+                    .child("tax").setValue(tax)
+
+                MyServiceScreen.detailsServiceSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+
+            })
+        builder.setNegativeButton(android.R.string.cancel,
+            DialogInterface.OnClickListener { dialog, which -> dialog.dismiss() })
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
 
     }
 

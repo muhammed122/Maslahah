@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.ProfileFragmentScreen"
-    android:background="#F6F6F6">
+    android:background="#F6F6F6"
+    tools:context=".ui.home.ProfileFragmentScreen">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
             android:background="@color/white"
-            android:layout_marginBottom="@dimen/_15sdp">
+            android:paddingBottom="@dimen/_10sdp">
 
 
             <androidx.constraintlayout.widget.Guideline
@@ -25,20 +26,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintGuide_percent="0.1"/>
+                app:layout_constraintGuide_percent="0.1"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/my_profile_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/my_profile"
-                app:layout_constraintTop_toBottomOf="@+id/g11"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_14ssp"
                 android:fontFamily="@font/sf_ui_display_semibold"
-                android:textColor="@color/main_color"/>
+                android:text="@string/my_profile"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/g11" />
 
 
 
@@ -46,146 +47,192 @@
                 android:id="@+id/user_profile_image"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
-                app:layout_constraintTop_toBottomOf="@+id/my_profile_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_10sdp"/>
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_profile_title" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_new_image"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_profile_title" />
+
+
+            <FrameLayout
+                android:id="@+id/edit_image_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/user_new_image">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/edit_btn"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_add_image"
+                    android:visibility="visible" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/save_updated_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/body_color"
+                    android:visibility="gone"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/cairo_semibold"/>
+
+
+            </FrameLayout>
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
-                app:layout_constraintTop_toBottomOf="@+id/user_profile_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="@dimen/_15ssp"
                 android:fontFamily="@font/sf_ui_display_semibold"
-                android:textColor="@color/main_color"/>
-
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/_15ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_image_layout" />
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_name"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_5sdp"
-                android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_5sdp"
-                app:cardCornerRadius="@dimen/_5sdp">
+                android:paddingVertical="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
 
-
-            <LinearLayout
-                android:id="@+id/data_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-
-                android:weightSum="3">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginVertical="@dimen/_5sdp"
-                    android:gravity="center">
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_tasks_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_14ssp"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/main_color"
-                        tools:text="415"/>
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_tasks_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_10ssp"
-                        android:text="@string/tasks"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/body_color"/>
-
-                </LinearLayout>
-                <View
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:background="@color/stroke_color"
-                    android:layout_gravity="center"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginVertical="@dimen/_5sdp"
-
-                    android:gravity="center">
-
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_balance_value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_14ssp"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/main_color"
-                        tools:text="415"/>
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_balance_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_10ssp"
-                        android:text="@string/my_balance"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/body_color"/>
-
-                </LinearLayout>
-                <View
-                    android:layout_width="@dimen/_1sdp"
-                    android:layout_height="@dimen/_18sdp"
-                    android:background="@color/stroke_color"
-                    android:layout_gravity="center"/>
+                app:layout_constraintTop_toBottomOf="@+id/profile_name">
 
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:id="@+id/data_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
 
-                    android:gravity="center">
+                    android:weightSum="3">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_tax_value"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_14ssp"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/main_color"
-                        tools:text="415"/>
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/profile_tax_name"
-                        android:layout_width="wrap_content"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_tasks_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:textColor="@color/main_color"
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="415" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_tasks_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:text="@string/tasks"
+                            android:textColor="@color/body_color"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_gravity="center"
+                        android:background="@color/stroke_color" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_10ssp"
-                        android:text="@string/tax"
-                        android:fontFamily="@font/sf_ui_display_semibold"
-                        android:textColor="@color/body_color"/>
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+
+                        android:orientation="vertical">
+
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_balance_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:textColor="@color/main_color"
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="415" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_balance_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:text="@string/my_balance"
+                            android:textColor="@color/body_color"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/_18sdp"
+                        android:layout_gravity="center"
+                        android:background="@color/stroke_color" />
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_tax_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:textColor="@color/main_color"
+                            android:textSize="@dimen/_14ssp"
+                            tools:text="415" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/profile_tax_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/sf_ui_display_semibold"
+                            android:text="@string/tax"
+                            android:textColor="@color/body_color"
+                            android:textSize="@dimen/_10ssp" />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
-
-
-
-
-            </LinearLayout>
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -194,219 +241,221 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginVertical="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
             app:cardElevation="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_5sdp">
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/profile_name">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/your_tasks"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_5sdp">
+                android:orientation="vertical"
+                >
 
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/tasks_icon"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/your_tasks"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_tasks_icon"/>
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/profile_tasks_did"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintStart_toEndOf="@+id/tasks_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:textColor="@color/main_color"
-                    android:text="@string/tasks_your_accomplished"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tasks_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:src="@drawable/ic_tasks_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_right_arrow"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/profile_tasks_did"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/tasks_your_accomplished"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tasks_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/stroke_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/your_balance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_5sdp">
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/balance_icon"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/your_balance"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_balance_icon"/>
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/balance_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_balance_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/profile_balance_details"
-                    android:layout_width="wrap_content"
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/profile_balance_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/your_balance"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/balance_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/your_tax"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintStart_toEndOf="@+id/balance_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:textColor="@color/main_color"
-                    android:text="@string/your_balance"/>
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tax_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/tax_icon_p"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/profile_tax_did"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/tax_you_have_to_pay_it"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tax_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/your_orders"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_right_arrow"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/stroke_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/your_tax"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:visibility="gone">
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/tax_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/tax_icon_p"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/orders_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_order_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/profile_tax_did"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintStart_toEndOf="@+id/tax_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:textColor="@color/main_color"
-                    android:text="@string/tax_you_have_to_pay_it"/>
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_right_arrow"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_1sdp"
-                android:background="@color/stroke_color"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/your_orders"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_5sdp">
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/profile_orders_did"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/orders_you_did"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/orders_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/orders_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_order_icon"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/profile_orders_did"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_12ssp"
-                    app:layout_constraintStart_toEndOf="@+id/orders_icon"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:textColor="@color/main_color"
-                    android:text="@string/orders_you_did"/>
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/ic_right_arrow"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/profile_name"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginVertical="@dimen/_5sdp"
             android:padding="@dimen/_5sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
             app:cardElevation="@dimen/_5sdp"
-            app:cardCornerRadius="@dimen/_5sdp">
+            app:layout_constraintTop_toBottomOf="@+id/profile_name">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -417,37 +466,35 @@
                     android:id="@+id/your_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/email_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_email_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_email_icon"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_email_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/email_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
                         android:textColor="@color/main_color"
-                        tools:text="@string/tasks_your_accomplished"/>
-
-
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/email_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/tasks_your_accomplished" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
@@ -460,86 +507,234 @@
                     android:id="@+id/your_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/phone_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_number_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_number_icon"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_phone_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/phone_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
                         android:textColor="@color/main_color"
-                        tools:text="01121308294"/>
-
-
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/phone_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="01121308294" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="@color/stroke_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/your_tele_chat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tele_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_telegram"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tele_chat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tele_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/start_chat"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/arrow3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/payment_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/pay_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_payment"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/payment_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/pay_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/pay_now"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/arrow4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/conditions_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/terms_icon"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:src="@drawable/ic_rules"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/terms_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/terms_icon"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/terms_polices"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/arrow5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_right_arrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/stroke_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/your_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_10sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:visibility="gone">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/lock_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_password_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_password_icon"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_password_value"
                         android:layout_width="wrap_content"
-                        android:inputType="textPassword"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/lock_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:inputType="textPassword"
+                        android:text="@string/tasks_your_accomplished"
                         android:textColor="@color/main_color"
-                        android:text="@string/tasks_your_accomplished"/>
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lock_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:src="@drawable/ic_right_arrow"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
@@ -551,54 +746,52 @@
                     android:id="@+id/your_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_7sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_7sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/lang_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_language_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_language_icon"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/lang_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/language"
                         android:textColor="@color/main_color"
-                        android:text="@string/language"/>
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/lang_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_language_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-
-                        app:layout_constraintEnd_toStartOf="@+id/arrow"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
+
                         android:textColor="@color/main_color"
-                       />
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/arrow"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/arrow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:src="@drawable/ic_right_arrow"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -609,37 +802,36 @@
                     android:background="@color/stroke_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_10sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/logout_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_logout_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_logout_icon"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/profile_logout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/logout_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/logout"
                         android:textColor="#EE0000"
-                        android:text="@string/logout"/>
-
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/logout_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -655,50 +847,46 @@
                     android:id="@+id/contact_us"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_7sdp"
-                    android:paddingHorizontal="@dimen/_5sdp">
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_7sdp">
 
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/contact_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/ic_contact_mail"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        android:src="@drawable/ic_contact_mail"/>
-
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/contact_email_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintStart_toEndOf="@+id/contact_icon"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:text="@string/contact_us"
                         android:textColor="@color/main_color"
-                        android:text="@string/contact_us"/>
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/contact_icon"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/email_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginHorizontal="@dimen/_20sdp"
-                        android:textColor="@color/main_color"
+                        android:layout_marginHorizontal="@dimen/_5sdp"
                         android:text="MASLAHA-CO@outlook.com"
-                        />
-
+                        android:textColor="@color/main_color"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             </LinearLayout>

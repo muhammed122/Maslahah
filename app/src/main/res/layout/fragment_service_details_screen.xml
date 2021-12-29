@@ -257,6 +257,8 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         android:text="@string/required_paper"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp"
+        android:visibility="gone"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v5" />
 
@@ -269,6 +271,8 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         android:textColor="@color/body_color"
         android:textSize="@dimen/_12ssp"
         android:textAlignment="viewStart"
+        android:visibility="gone"
+
         app:layout_constraintTop_toBottomOf="@+id/service_papers_txt"
         tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
 Maadi Bank Misr Egypt New Cai Egypt New Cairo" />

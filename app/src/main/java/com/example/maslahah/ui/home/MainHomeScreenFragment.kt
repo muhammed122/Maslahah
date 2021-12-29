@@ -183,7 +183,7 @@ class MainHomeScreenFragment : Fragment() {
         databaseReference.child("users").child(phone).child("tax")
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.getValue(Int::class.java)!! >= 200)
+                    if (snapshot.getValue(Int::class.java)!! >= 50)
                         showSuspendDialog()
 
                 }

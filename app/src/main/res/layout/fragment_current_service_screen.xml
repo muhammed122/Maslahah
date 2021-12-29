@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/carve_card_background"
     android:backgroundTint="@color/main_color"
-    tools:context=".ui.home.CurrentServiceScreen"
     android:paddingTop="@dimen/_7sdp"
-    android:paddingBottom="@dimen/_10sdp">
+    android:paddingBottom="@dimen/_10sdp"
+    tools:context=".ui.home.CurrentServiceScreen">
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -26,16 +26,16 @@
         android:id="@+id/current_service_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/v"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:fontFamily="@font/sf_ui_display_semibold"
         android:layout_marginTop="@dimen/_5sdp"
+        android:fontFamily="@font/sf_ui_display_semibold"
+        android:padding="@dimen/_8sdp"
         android:text="@string/current_service"
-        android:textSize="@dimen/_14ssp"
         android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
         android:visibility="gone"
-        android:padding="@dimen/_8sdp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/v" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/user_image"
@@ -76,12 +76,11 @@
         android:id="@+id/whatsapp"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:src="@drawable/ic_whatsapp"
         app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
         app:layout_constraintEnd_toStartOf="@+id/call_btn"
-        android:src="@drawable/ic_whatsapp"
-        android:layout_marginHorizontal="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
-
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -90,8 +89,8 @@
         android:layout_height="@dimen/_25sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:background="@drawable/button_shape_2"
-        android:drawableTint="@color/accent_color"
         android:drawableStart="@drawable/ic_call_icon"
+        android:drawableTint="@color/accent_color"
         android:fontFamily="@font/sf_ui_display_bold"
         android:gravity="center"
         android:paddingStart="@dimen/_5sdp"
@@ -123,10 +122,10 @@
         android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:src="@drawable/ic_time_icon"
-        app:tint="@color/accent_color"
         app:layout_constraintBottom_toBottomOf="@+id/service_date_time_txt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v2" />
+        app:layout_constraintTop_toBottomOf="@+id/v2"
+        app:tint="@color/accent_color" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -215,9 +214,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:fontFamily="@font/sf_ui_display_medium"
+        android:textAlignment="viewStart"
         android:textColor="@color/body_color"
         android:textSize="@dimen/_12ssp"
-        android:textAlignment="viewStart"
         app:layout_constraintTop_toBottomOf="@+id/service_title_txt"
         tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
 Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
@@ -254,9 +253,9 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:fontFamily="@font/sf_ui_display_medium"
+        android:textAlignment="viewStart"
         android:textColor="@color/body_color"
         android:textSize="@dimen/_12ssp"
-        android:textAlignment="viewStart"
         app:layout_constraintTop_toBottomOf="@+id/service_details_txt"
         tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
 Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
@@ -283,6 +282,7 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         android:fontFamily="@font/sf_ui_display_semibold"
         android:text="@string/required_paper"
         android:textColor="@color/white"
+        android:visibility="gone"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v5" />
@@ -293,9 +293,11 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:fontFamily="@font/sf_ui_display_medium"
+        android:textAlignment="viewStart"
         android:textColor="@color/body_color"
         android:textSize="@dimen/_12ssp"
-        android:textAlignment="viewStart"
+        android:visibility="gone"
+
         app:layout_constraintTop_toBottomOf="@+id/service_papers_txt"
         tools:text="Egypt New Cairo Maadi Bank Misr Egypt Ew Cairo
 Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
@@ -315,9 +317,9 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
             android:layout_height="wrap_content"
             android:layout_weight="1.8"
             android:background="@drawable/button_shape_2"
+            android:backgroundTint="@color/accent_color"
             android:fontFamily="@font/sf_ui_display_bold"
             android:gravity="center"
-            android:backgroundTint="@color/accent_color"
             android:text="@string/done_terminate"
             android:textAllCaps="false"
             android:textColor="@color/accent_color"
@@ -326,17 +328,16 @@ Maadi Bank Misr Egypt New Cai Egypt New Cairo" />
             app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
 
 
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_weight="1.8"
-            android:paddingHorizontal="@dimen/_5sdp"
             android:background="@drawable/button_shape_2"
             android:fontFamily="@font/sf_ui_display_bold"
             android:gravity="center"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_5sdp"
             android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="@color/accent_color"

@@ -13,7 +13,7 @@
     <string name="signin_guid_message2" translatable="false">Sign Into Your Account With your Email And Password</string>
     <string name="login" translatable="false">Login</string>
     <string name="or" translatable="false">OR</string>
-    <string name="login_email" translatable="false">Login With Emai And Password</string>
+    <string name="login_email" translatable="false">Login With Email And Password</string>
     <string name="login_phone" translatable="false">Login With Phone Number</string>
     <string name="forget_password" translatable="false">Forget Password ?</string>
     <string name="otp_verification" translatable="false">Otp Verification</string>
@@ -85,8 +85,8 @@
     <string name="communication_info">communication info</string>
     <string name="continue_with_google">Continue With Google</string>
     <string name="price_of_service">Price of service</string>
-    <string name="edit_service">Edit Service Data</string>
-    <string name="edit">Edit</string>
+    <string name="edit_service">Service Data</string>
+    <string name="edit">save changes</string>
     <string name="successfully_updated">Successfully updated</string>
     <string name="cancel">Cancel</string>
     <string name="cancel_message">If you cancel this service you will pay 10 LE Financial penalty </string>
@@ -94,12 +94,20 @@
     <string name="terms_polices"><![CDATA[Terms & Policy]]></string>
     <string name="terms_agree">you have should agree on terms and policy</string>
     <string name="terms_content">1- you should insert correct phone \n
-        2- if you have more than 200 LE as Tax \n your account will be suspended -\n
-    3- you should send money using Vodafone cash service -\n
-    4- send money to this number 01000769800</string>
+        2- Funds are sent initially when the amount of 50 pounds is due -\n
+    3- After sending the money, please send the transfer data to the support via telegram or private email so that the account can be activated again -\n
+    4- We always welcome direct communication with users via social media \n
+</string>
 
 
     <string name="suspended_message">Your account has been suspended until the tax due is paid </string>
     <string name="contact_us">Contact Us</string>
+    <string name="save">Save</string>
+    <string name="cancel_service">Cancel service</string>
+    <string name="service_selected">Sorry,cannot update service after it was selected</string>
+    <string name="service_deleted">service deleted</string>
+    <string name="cancel_service_owner">Cancel service after it was selected will cause of 10 LE as tax</string>
+    <string name="start_chat">start chat</string>
+    <string name="pay_now">Pay Now</string>
 
 </resources>

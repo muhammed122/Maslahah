@@ -121,16 +121,12 @@ class CurrentServiceScreen : Fragment() {
     }
 
 
-    override fun onResume() {
-        super.onResume()
-
-
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (currentServiceId != "")
+        if (currentServiceId != "") {
             getServiceDetails()
+            observeOnServiceDeleted()
+        }
     }
 
 
@@ -265,7 +261,7 @@ class CurrentServiceScreen : Fragment() {
                                             "Your ${currentServiceData.title} accepted from ${user.name}"
                                         ),
                                         userService.userToken!!
-                                    )
+                                    ),userServicePhone
                                 )
 
                                 MyPreference.setPrefInt("serviceStatus", 1)
@@ -283,7 +279,7 @@ class CurrentServiceScreen : Fragment() {
                                             "Your ${currentServiceData.title} canceled from ${user.name}"
                                         ),
                                         userService.userToken!!
-                                    )
+                                    ),userServicePhone
                                 )
 
                                 MyPreference.setPrefInt("serviceStatus", 1)
@@ -320,7 +316,7 @@ class CurrentServiceScreen : Fragment() {
                                             "${user.name}  finished your service ${currentServiceData.title}"
                                         ),
                                         userService.userToken!!
-                                    )
+                                    ),userServicePhone
                                 )
                                 MyPreference.setPrefInt("serviceStatus", 0)
 //                                Toast.makeText(
@@ -345,7 +341,7 @@ class CurrentServiceScreen : Fragment() {
 
                                 //add balance and tasks to user
                                 val balance = service.price?.plus(user.balance!!)
-                                val tax = service.price?.times(0.10)
+                                val tax = service.price?.times(0.10)?.plus(user.tax!!)
 
                                 databaseReference.child("users").child(phone)
                                     .child("tax").setValue(tax)
@@ -381,25 +377,25 @@ class CurrentServiceScreen : Fragment() {
     }
 
 
-    private fun sendNotification(notification: PushNotification) {
+    private fun sendNotification(notification: PushNotification , phone :String) {
         ProgressLoading.show()
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = RetrofitInstance.api.postNotification(notification)
                 if (response.isSuccessful) {
 
-                    databaseReference.child("notification").child(userService.phone!!).push()
+                    databaseReference.child("notification").child(phone).push()
                         .setValue(notification.data.message)
 
                     ProgressLoading.dismiss()
 
                 } else {
                     ProgressLoading.dismiss()
-                    Log.e("dddddd", response.errorBody().toString())
+
                 }
             } catch (e: Exception) {
                 ProgressLoading.dismiss()
-                Log.e("ddddd", e.toString())
+
             }
         }
 
@@ -423,6 +419,60 @@ class CurrentServiceScreen : Fragment() {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+
+    }
+
+
+    private fun observeOnServiceDeleted() {
+        databaseReference.child("services").child(currentServiceId)
+            .child("status").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val status = snapshot.getValue(Int::class.java)
+                    if (status == 6) {
+                        databaseReference.child("services").child(currentServiceId)
+                            .removeValue()
+                        databaseReference.child("users").child(user.phone!!)
+                            .child("userToken")
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    val token = snapshot.getValue(String::class.java)
+                                    if (token!=null)
+                                    sendNotification(
+                                        PushNotification(
+                                            NotificationData(
+                                                "service state",
+                                                "sorry service  ${currentServiceData.title} canceled from owner"
+                                            ),
+                                            token
+                                        ),user.phone!!
+                                    )
+
+                                    MyPreference.setPrefInt("serviceStatus", 1)
+                                    currentServiceStatus = 1
+
+                                    //remove current service
+                                    databaseReference.child("current_service").child(phone)
+                                        .removeValue()
+
+                                    //make user free
+                                    databaseReference.child("users").child(phone)
+                                        .child("available").setValue(true)
+                                    databaseReference.child("current_service")
+                                        .child(phone).child("serviceStatus").setValue(0)
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+
+                                }
+                            })
+                    }
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {
+
+                }
+            })
 
 
     }

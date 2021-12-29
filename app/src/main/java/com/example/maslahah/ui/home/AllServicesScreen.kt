@@ -115,9 +115,11 @@ class AllServicesScreen : Fragment(), ServiceItemClickListener {
 
     private fun getServicesData() {
         ProgressLoading.show()
-        listener = databaseReference.child("services").orderByChild("selected").equalTo(false)
+        listener = databaseReference.child("services")
+            .orderByChild("selected").equalTo(false)
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    ProgressLoading.dismiss()
                     if (snapshot.hasChildren()) {
                         serviceAdapter.setOneService(snapshot.getValue(ServiceData::class.java)!!)
                         binding.noLoadedTxt.visibility = View.GONE

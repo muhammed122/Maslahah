@@ -16,8 +16,8 @@ class NotificationAdapter() :
 
 
     fun addNotification(body: String) {
-        list.add(body)
-        notifyDataSetChanged()
+        list.add(0,body)
+        notifyItemInserted(0)
     }
 
 

@@ -147,6 +147,7 @@
                 android:text="@string/required_paper"
                 android:textColor="@color/body_color"
                 android:textSize="@dimen/_12ssp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/service_price_et" />
 
@@ -158,6 +159,9 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:background="@drawable/edit_text_shape"
                 android:hint="@string/papers_eaxmple"
+                android:inputType="text"
+                android:visibility="gone"
+
 
                 android:textAlignment="viewStart"
                 android:padding="@dimen/_8sdp"
@@ -191,21 +195,53 @@
                 app:layout_constraintTop_toBottomOf="@+id/service_desc_txt" />
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/edit_service_btn"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:background="@drawable/button_shape"
-                android:enabled="true"
-                android:fontFamily="@font/sf_ui_display_semibold"
-                android:text="@string/edit"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/service_details_et" />
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center"
+                android:weightSum="4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/service_details_et">
+
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/edit_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8"
+                    android:background="@drawable/button_shape_2"
+                    android:backgroundTint="@color/accent_color"
+                    android:fontFamily="@font/sf_ui_display_bold"
+                    android:gravity="center"
+                    android:text="@string/edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent_color"
+                   />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/cancel_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_weight="1.8"
+                    android:background="@drawable/button_shape_2"
+                    android:fontFamily="@font/sf_ui_display_bold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:text="@string/cancel_service"
+                    android:textAllCaps="false"
+                    android:textColor="@color/accent_color"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_service_name_txt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/user_service_name_txt" />
+
+
+            </LinearLayout>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

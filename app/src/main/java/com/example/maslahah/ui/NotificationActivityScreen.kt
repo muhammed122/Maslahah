@@ -34,6 +34,7 @@ class NotificationActivityScreen : LocalizationActivity() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification_screen)
@@ -44,11 +45,12 @@ class NotificationActivityScreen : LocalizationActivity() {
 
     }
 
+    lateinit var childEventListener: ChildEventListener
 
     private fun getAllNotifications() {
         ProgressLoading.show()
         val phone = MyPreference.getPrefString("userPhone")
-        databaseReference.child("notification").child(phone)
+       childEventListener= databaseReference.child("notification").child(phone)
             .addChildEventListener(object : ChildEventListener {
                 override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                     if (snapshot.exists())
@@ -83,10 +85,15 @@ class NotificationActivityScreen : LocalizationActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        val phone = MyPreference.getPrefString("userPhone")
+        databaseReference.child("notification").child(phone)
+            .removeEventListener(childEventListener)
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
-        startActivity(Intent(this, HomeActivityScreen::class.java))
         finish()
 
     }

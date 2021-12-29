@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_profileFragmentScreen_to_taxScreenFragment"
             app:destination="@id/taxScreenFragment" />
+        <action
+            android:id="@+id/action_profileFragmentScreen_to_termsAndPolicyFragment2"
+            app:destination="@id/termsAndPolicyFragment2" />
     </fragment>
     <fragment
         android:id="@+id/balanceFragmentScreen"
@@ -74,4 +77,9 @@
             android:name="balance"
             app:argType="float" />
     </fragment>
+    <fragment
+        android:id="@+id/termsAndPolicyFragment2"
+        android:name="com.example.maslahah.ui.home.TermsAndPolicyFragment"
+        android:label="fragment_terms_and_policy"
+        tools:layout="@layout/fragment_terms_and_policy" />
 </navigation>
